@@ -21,6 +21,8 @@ import "./game.css";
 const numQuestionsToFetch = 50;
 
 export default function Game() {
+  const teamOneName = "Team 1";
+  const teamTwoName = "Team 2";
   const [trivia, setTrivia] = useState();
   const [currRoundNumber, setCurrRoundNumber] = useState(1);
   const [categories, setCategories] = useState("");
@@ -51,7 +53,7 @@ export default function Game() {
         <CategorySelector
           initialCategories={categories}
           handleSubmit={handleCategorySubmit}
-          teamName={currRoundNumber % 2 == 0 ? "Team 2" : "Team 1"}
+          teamName={currRoundNumber % 2 == 0 ? teamTwoName : teamOneName}
           buttonText={
             currRoundNumber == 1
               ? "Start game"
