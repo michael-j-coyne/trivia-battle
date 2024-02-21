@@ -1,6 +1,8 @@
 #root {
+  --default-page-padding: 2rem;
+
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--default-page-padding);
   text-align: center;
 }
