@@ -14,23 +14,29 @@
 
 import { useState, useEffect } from "react";
 import Round from "../components/Round";
+import CategorySelector from "../components/CategorySelector";
 import fetchTrivia from "../fetchTrivia";
 import "./game.css";
 
+const numQuestionsToFetch = 50;
+
 export default function Game() {
   const [trivia, setTrivia] = useState();
+  const [currRoundNumber, setCurrRoundNumber] = useState(1);
+  const [categories, setCategories] = useState("");
   const [roundInProgress, setRoundInProgress] = useState(false);
 
-  useEffect(() => {
+  function handleCategorySubmit(categoryIdArr) {
+    setCategories(categoryIdArr);
     fetchTrivia({
-      amount: 50,
-      categories: "society_and_culture,science",
+      amount: numQuestionsToFetch,
+      categories: categoryIdArr.join(),
       difficulties: "easy,medium,hard",
     })
       .then((trivia) => setTrivia(trivia))
       .then(() => setRoundInProgress(true))
       .catch((e) => console.error(e));
-  }, []);
+  }
 
   return (
     <div className="game">
@@ -41,7 +47,16 @@ export default function Game() {
           setRoundInProgress={setRoundInProgress}
         />
       ) : (
-        <h1>This is a placeholder for the "between rounds" screen</h1>
+        <CategorySelector
+          initialCategories={categories}
+          handleSubmit={handleCategorySubmit}
+          teamName={currRoundNumber % 2 == 0 ? "Team 2" : "Team 1"}
+          buttonText={
+            currRoundNumber == 1
+              ? "Start game"
+              : `Start round ${currRoundNumber}`
+          }
+        />
       )}
     </div>
   );
