@@ -1,12 +1,21 @@
 .trivia {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (orientation: landscape) {
+  .trivia {
+    justify-content: space-between;
+  }
 }
 
 .trivia__title {
-  margin-bottom: 50px;
+  font-size: 2rem;
 }
 
 .trivia__choice-container {
@@ -16,20 +25,15 @@
   gap: 10px;
 }
 
-@media screen and (orientation: landscape) {
-  .trivia__choice-container {
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-}
-
 .trivia__choice {
   background: transparent;
+
+  color: black;
 
   border-radius: 8px;
   border: 0.8px solid #4d5b9e;
   min-width: 64px;
-  padding: 16px 16px;
+  padding: 16px;
 
   font-size: 1.25rem;
 }
