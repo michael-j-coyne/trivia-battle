@@ -13,13 +13,13 @@
   */
 
 import { useState, useEffect } from "react";
-import Trivia from "../components/Trivia";
+import Round from "../components/Round";
 import fetchTrivia from "../fetchTrivia";
 import "./game.css";
 
 export default function Game() {
   const [trivia, setTrivia] = useState();
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [roundInProgress, setRoundInProgress] = useState(false);
 
   useEffect(() => {
     fetchTrivia({
@@ -28,30 +28,20 @@ export default function Game() {
       difficulties: "easy,medium,hard",
     })
       .then((trivia) => setTrivia(trivia))
+      .then(() => setRoundInProgress(true))
       .catch((e) => console.error(e));
   }, []);
 
-  console.log(trivia);
-
-  function nextQuestion() {
-    if (!trivia) return;
-    if (currentIndex == trivia.length - 1) {
-      console.error("There aren't any more questions!");
-      return;
-    }
-    setCurrentIndex((oldIdx) => oldIdx + 1);
-  }
-
   return (
     <div className="game">
-      {trivia && (
-        <>
-          <Trivia
-            question={trivia[currentIndex].question}
-            choices={trivia[currentIndex].choices}
-          />
-          <button onClick={nextQuestion}>Next Question</button>
-        </>
+      {roundInProgress ? (
+        <Round
+          trivia={trivia}
+          numQuestionsInRound={10}
+          setRoundInProgress={setRoundInProgress}
+        />
+      ) : (
+        <h1>This is a placeholder for the "between rounds" screen</h1>
       )}
     </div>
   );
