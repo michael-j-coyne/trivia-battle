@@ -1,0 +1,6 @@
+.game {
+  height: calc(100vh - 2 * var(--default-page-padding));
+
+  display: grid;
+  grid-template-rows: 1fr auto;
+}

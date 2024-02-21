@@ -15,6 +15,7 @@
 import { useState, useEffect } from "react";
 import Trivia from "../components/Trivia";
 import fetchTrivia from "../fetchTrivia";
+import "./game.css";
 
 export default function Game() {
   const [trivia, setTrivia] = useState();
@@ -42,7 +43,7 @@ export default function Game() {
   }
 
   return (
-    <div>
+    <div className="game">
       {trivia && (
         <>
           <Trivia
