@@ -7,6 +7,7 @@ export default function Round({
   teamOneName, // string
   teamTwoName, // string
   numQuestionsInRound, // int
+  incrementRound, // function(void)
   seenQuestions, // Set(string)
   updateSeenQuestions, // function
   setRoundInProgress, // function
@@ -17,8 +18,7 @@ export default function Round({
   function nextQuestion() {
     if (!trivia) return;
     if (numQuestionsSeen.current === numQuestionsInRound) {
-      // Will need to update state to indicate round is over
-      console.log("That's the end of the round!");
+      incrementRound();
       setRoundInProgress(false);
       return;
     }

@@ -44,6 +44,7 @@ export default function Game() {
         <Round
           trivia={trivia}
           numQuestionsInRound={10}
+          incrementRound={() => setCurrRoundNumber((prev) => prev + 1)}
           setRoundInProgress={setRoundInProgress}
         />
       ) : (
