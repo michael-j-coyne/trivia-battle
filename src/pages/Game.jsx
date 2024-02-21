@@ -18,10 +18,11 @@ import fetchTrivia from "../fetchTrivia";
 
 export default function Game() {
   const [trivia, setTrivia] = useState();
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     fetchTrivia({
-      amount: 1,
+      amount: 50,
       categories: "society_and_culture,science",
       difficulties: "easy,medium,hard",
     })
@@ -31,10 +32,25 @@ export default function Game() {
 
   console.log(trivia);
 
+  function nextQuestion() {
+    if (!trivia) return;
+    if (currentIndex == trivia.length - 1) {
+      console.error("There aren't any more questions!");
+      return;
+    }
+    setCurrentIndex((oldIdx) => oldIdx + 1);
+  }
+
   return (
     <div>
       {trivia && (
-        <Trivia question={trivia[0].question} choices={trivia[0].choices} />
+        <>
+          <Trivia
+            question={trivia[currentIndex].question}
+            choices={trivia[currentIndex].choices}
+          />
+          <button onClick={nextQuestion}>Next Question</button>
+        </>
       )}
     </div>
   );
