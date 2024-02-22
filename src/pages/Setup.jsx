@@ -95,7 +95,7 @@ export default function Setup() {
                         // should show error to user
                         return;
                       }
-                      nextScreen;
+                      nextScreen();
                     }}
                   />
                 </div>
