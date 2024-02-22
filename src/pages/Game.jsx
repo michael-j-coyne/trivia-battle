@@ -20,6 +20,8 @@ import fetchTrivia from "../fetchTrivia";
 import "./game.css";
 
 const numQuestionsToFetch = 50;
+const totalRounds = 2;
+const questionsPerRound = 1;
 
 export default function Game() {
   const teamOneName = "Team 1";
@@ -57,7 +59,7 @@ export default function Game() {
           trivia={trivia}
           startingTeam={currRoundNumber % 2 == 0 ? TEAM_TWO : TEAM_ONE}
           teamNames={{ [TEAM_ONE]: teamOneName, [TEAM_TWO]: teamTwoName }}
-          numQuestionsInRound={10}
+          numQuestionsInRound={questionsPerRound}
           incrementRound={() => setCurrRoundNumber((prev) => prev + 1)}
           setRoundInProgress={setRoundInProgress}
           increaseScore={increaseScore}
