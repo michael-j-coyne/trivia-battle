@@ -46,6 +46,8 @@ function BackButton({ handleClick }) {
 export default function Setup() {
   const [teamOneName, setTeamOneName] = useState("");
   const [teamTwoName, setTeamTwoName] = useState("");
+  const [numRounds, setNumRounds] = useState(2);
+  const [numQuestionsPerRound, setNumQuestionsPerRound] = useState(8);
   const [currIdx, setCurrIdx] = useState(0);
 
   function nextScreen() {
@@ -109,11 +111,13 @@ export default function Setup() {
                 </h1>
                 <div className="setup__select-container">
                   <label htmlFor="num-rounds-select">Number of rounds</label>
-                  <select id="num-rounds-select">
+                  <select
+                    value={numRounds}
+                    onChange={(e) => setNumRounds(e.target.value)}
+                    id="num-rounds-select"
+                  >
                     <option value="1">1</option>
-                    <option selected="selected" value="2">
-                      2
-                    </option>
+                    <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                   </select>
@@ -122,14 +126,14 @@ export default function Setup() {
                   <label htmlFor="num-questions-select">
                     <em>Total</em> number of questions per round
                   </label>
-                  <select id="num-questions-select">
-                    {Array.from({ length: 20 }).map((val, idx) => (
-                      <option
-                        selected={idx === 5 ? "selected" : ""}
-                        key={idx}
-                        value={idx + 1}
-                      >
-                        {idx + 1}
+                  <select
+                    value={numQuestionsPerRound}
+                    onChange={(e) => setNumQuestionsPerRound(e.target.value)}
+                    id="num-questions-select"
+                  >
+                    {Array.from({ length: 10 }).map((val, idx) => (
+                      <option key={idx} value={idx * 2 + 2}>
+                        {idx * 2 + 2}
                       </option>
                     ))}
                   </select>
