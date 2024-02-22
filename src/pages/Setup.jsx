@@ -65,7 +65,15 @@ export default function Setup() {
                   setName={setTeamOneName}
                   title="Pick a name for team one!"
                 />
-                <NextButton handleClick={nextScreen} />
+                <NextButton
+                  handleClick={() => {
+                    if (teamOneName === "") {
+                      // should show error to user
+                      return;
+                    }
+                    nextScreen();
+                  }}
+                />
               </>
             );
           case "pickTeamTwoName":
@@ -78,7 +86,15 @@ export default function Setup() {
                 />
                 <div className="setup__next-back-container">
                   <BackButton handleClick={goBack} />
-                  <NextButton handleClick={nextScreen} />
+                  <NextButton
+                    handleClick={() => {
+                      if (teamTwoName === "" || teamTwoName === teamOneName) {
+                        // should show error to user
+                        return;
+                      }
+                      nextScreen;
+                    }}
+                  />
                 </div>
               </>
             );
