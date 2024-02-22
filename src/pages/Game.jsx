@@ -12,7 +12,7 @@
   I'll implement this page first, using some data from a .json file so I can focus on the game flow and ignore the fetching logic for now.
   */
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { TEAM_ONE, TEAM_TWO } from "../consts";
 import Round from "../components/Round";

@@ -9,8 +9,6 @@ export default function Round({
   teamNames, // { [TEAM_ONE]: teamOneName, [TEAM_TWO]: teamTwoName }
   numQuestionsInRound, // int
   incrementRound, // function(void)
-  seenQuestions, // Set(string)
-  updateSeenQuestions, // function
   setRoundInProgress, // function,
   increaseScore, // function
 }) {
