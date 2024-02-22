@@ -1,0 +1,138 @@
+export const stuff = [
+  {
+    id: "62433403cfaae40c12961419",
+    category: "science",
+    question: "What would you call a baby frog?",
+    correctAnswer: "A Tadpole",
+    choices: ["A Piglet", "A Calf", "A Tadpole", "A Maggot"],
+  },
+  {
+    id: "6243333fcfaae40c129613cd",
+    category: "science",
+    question: "What is the word for a young bird?",
+    correctAnswer: "A Chick",
+    choices: ["An Owlet", "A Bunny", "A Chick", "A Poult"],
+  },
+  {
+    id: "622a1c377cc59eab6f9504b6",
+    category: "science",
+    question: "What is Phytology the study of?",
+    correctAnswer: "plants; botany",
+    choices: [
+      "the science of preparing and handling microscopic objects for study",
+      "the study or exploration of caves",
+      "wonders, or monsters",
+      "plants; botany",
+    ],
+  },
+  {
+    id: "622a1c377cc59eab6f9504cb",
+    category: "science",
+    question: "What is Paleoclimatology the study of?",
+    correctAnswer: "prehistoric climates",
+    choices: [
+      "a branch of soil science that studies the influence of soil on life",
+      "the study and science of phenomena as distinct from the science of actual existence or being",
+      "prehistoric climates",
+      "cancer",
+    ],
+  },
+  {
+    id: "6243357dcfaae40c129614ad",
+    category: "science",
+    question: "What is the word for a young turtle?",
+    correctAnswer: "A Hatchling",
+    choices: ["A Piglet", "A Maggot", "A Hatchling", "A Lamb"],
+  },
+  {
+    id: "622a1c377cc59eab6f9504cb",
+    category: "science",
+    question: "What is Paleoclimatology the study of?",
+    correctAnswer: "prehistoric climates",
+    choices: [
+      "a branch of soil science that studies the influence of soil on life",
+      "the study and science of phenomena as distinct from the science of actual existence or being",
+      "prehistoric climates",
+      "cancer",
+    ],
+  },
+];
+
+// export const stuff = [
+//   {
+//     id: "6243333fcfaae40c129613cd",
+//     category: "science",
+//     question: "What is the word for a young bird?",
+//     correctAnswer: "A Chick",
+//     choices: ["An Owlet", "A Bunny", "A Chick", "A Poult"],
+//   },
+//   {
+//     id: "6243333fcfaae40c129613cd",
+//     category: "science",
+//     question: "What is the word for a young bird?",
+//     correctAnswer: "A Chick",
+//     choices: ["An Owlet", "A Bunny", "A Chick", "A Poult"],
+//   },
+//   {
+//     id: "622a1c377cc59eab6f9504b6",
+//     category: "science",
+//     question: "What is Phytology the study of?",
+//     correctAnswer: "plants; botany",
+//     choices: [
+//       "the science of preparing and handling microscopic objects for study",
+//       "the study or exploration of caves",
+//       "wonders, or monsters",
+//       "plants; botany",
+//     ],
+//   },
+//   {
+//     id: "622a1c377cc59eab6f9504cb",
+//     category: "science",
+//     question: "What is Paleoclimatology the study of?",
+//     correctAnswer: "prehistoric climates",
+//     choices: [
+//       "a branch of soil science that studies the influence of soil on life",
+//       "the study and science of phenomena as distinct from the science of actual existence or being",
+//       "prehistoric climates",
+//       "cancer",
+//     ],
+//   },
+//   {
+//     id: "62433403cfaae40c12961419",
+//     category: "science",
+//     question: "What would you call a baby frog?",
+//     correctAnswer: "A Tadpole",
+//     choices: ["A Piglet", "A Calf", "A Tadpole", "A Maggot"],
+//   },
+//   {
+//     id: "622a1c377cc59eab6f9504cb",
+//     category: "science",
+//     question: "What is Paleoclimatology the study of?",
+//     correctAnswer: "prehistoric climates",
+//     choices: [
+//       "a branch of soil science that studies the influence of soil on life",
+//       "the study and science of phenomena as distinct from the science of actual existence or being",
+//       "prehistoric climates",
+//       "cancer",
+//     ],
+//   },
+//   {
+//     id: "6243357dcfaae40c129614ad",
+//     category: "science",
+//     question: "What is the word for a young turtle?",
+//     correctAnswer: "A Hatchling",
+//     choices: ["A Piglet", "A Maggot", "A Hatchling", "A Lamb"],
+//   },
+//   {
+//     id: "622a1c377cc59eab6f9504cb",
+//     category: "science",
+//     question: "What is Paleoclimatology the study of?",
+//     correctAnswer: "prehistoric climates",
+//     choices: [
+//       "a branch of soil science that studies the influence of soil on life",
+//       "the study and science of phenomena as distinct from the science of actual existence or being",
+//       "prehistoric climates",
+//       "cancer",
+//     ],
+//   },
+// ];
