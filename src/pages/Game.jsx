@@ -45,7 +45,7 @@ export default function Game() {
   let params = new URLSearchParams(location.search);
 
   function isSaveGame() {
-    return false;
+    return Boolean(localStorage.getItem("saveData"));
   }
 
   function hasRequiredQueryParams() {
@@ -57,6 +57,83 @@ export default function Game() {
     );
   }
 
+  function toJson() {
+    return JSON.stringify({
+      turn: turn,
+      questionCompleted: questionCompleted,
+      numQuestionsSeen: numQuestionsSeen.current, // this is a ref
+      currentTriviaIdx: currentTriviaIdx,
+      teamOneName: teamOneName,
+      teamTwoName: teamTwoName,
+      totalRounds: totalRounds,
+      questionsPerRound: questionsPerRound,
+      trivia: trivia,
+      currRoundNumber: currRoundNumber,
+      categories: categories,
+      roundInProgress: roundInProgress,
+      score: score,
+    });
+  }
+
+  function fromJson(json) {
+    let data = JSON.parse(json);
+
+    setTurn(data.turn);
+    setQuestionCompleted(data.questionCompleted);
+    setCurrentTriviaIdx(data.currentTriviaIdx);
+    setTeamOneName(data.teamOneName);
+    setTeamTwoName(data.teamTwoName);
+    setTotalRounds(data.totalRounds);
+    setQuestionsPerRound(data.questionsPerRound);
+    setTrivia(data.trivia);
+    setCurrRoundNumber(data.currRoundNumber);
+    setCategories(data.categories);
+    setRoundInProgress(data.roundInProgress);
+    setScore(data.score);
+
+    numQuestionsSeen.current = data.numQuestionsSeen;
+  }
+
+  function save() {
+    const saveData = toJson();
+    const seenQuestions = JSON.stringify([...seen.current]);
+
+    localStorage.setItem("saveData", saveData);
+    localStorage.setItem("seenQuestions", seenQuestions);
+  }
+
+  useEffect(() => {
+    if (currRoundNumber === 1 && !roundInProgress) {
+      // load data from save if it exists
+      if (isSaveGame()) {
+        fromJson(localStorage.getItem("saveData"));
+
+        let seenQuestions = localStorage.getItem("seenQuestions");
+        const dataToSave = new Set(JSON.parse(seenQuestions));
+        seen.current = seenQuestions ? dataToSave : seen.current;
+      }
+      return;
+    }
+
+    save();
+  }, [
+    turn,
+    questionCompleted,
+    numQuestionsSeen,
+    currentTriviaIdx,
+    seen.current,
+    teamOneName,
+    teamTwoName,
+    totalRounds,
+    questionsPerRound,
+    trivia,
+    currRoundNumber,
+    categories,
+    roundInProgress,
+    score,
+    gameCompleted,
+  ]);
+
   useEffect(() => {
     // reset stuff
     setTurn(currRoundNumber % 2 == 0 ? TEAM_TWO : TEAM_ONE);
@@ -65,10 +142,13 @@ export default function Game() {
     setCurrentTriviaIdx(0);
   }, [currRoundNumber]);
 
+  // handle redirects
   useEffect(() => {
     if (!isSaveGame() && !hasRequiredQueryParams()) {
-      console.log("navigating");
       navigate("/setup");
+    } else if (isSaveGame()) {
+      console.log("saveData found");
+      // navigate("/continue");
     }
   }, []);
 
