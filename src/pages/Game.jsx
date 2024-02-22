@@ -14,11 +14,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Trivia from "../components/Trivia";
 import { TEAM_ONE, TEAM_TWO } from "../consts";
-import Round from "../components/Round";
 import CategorySelector from "../components/CategorySelector";
 import fetchTrivia from "../fetchTrivia";
 import "./game.css";
+import "../components/round.css";
 
 const numQuestionsToFetch = 50;
 
@@ -88,6 +89,35 @@ export default function Game() {
     }));
   }
 
+  const swapTurn = () =>
+    setTurn((prevTurn) => (prevTurn === TEAM_ONE ? TEAM_TWO : TEAM_ONE));
+
+  function nextQuestion() {
+    if (!trivia) return;
+    if (numQuestionsSeen.current === questionsPerRound) {
+      setCurrRoundNumber((prev) => prev + 1);
+      setRoundInProgress(false);
+      return;
+    }
+
+    setCurrentTriviaIdx((prevIdx) => {
+      let newIdx = prevIdx + 1;
+
+      while (newIdx < trivia.length) {
+        if (seen.current.has(trivia[newIdx].id)) {
+          newIdx++;
+        } else {
+          break;
+        }
+      }
+
+      return newIdx;
+    });
+    numQuestionsSeen.current = numQuestionsSeen.current + 1;
+    swapTurn();
+    setQuestionCompleted(false);
+  }
+
   function handleCategorySubmit(categoryIdArr) {
     setCategories(categoryIdArr);
     fetchTrivia({
@@ -110,22 +140,23 @@ export default function Game() {
           {score[TEAM_ONE] === score[TEAM_TWO] && "Its a tie!"}
         </h1>
       ) : roundInProgress ? (
-        <Round
-          trivia={trivia}
-          seen={seen}
-          teamNames={{ [TEAM_ONE]: teamOneName, [TEAM_TWO]: teamTwoName }}
-          numQuestionsInRound={questionsPerRound}
-          incrementRound={() => setCurrRoundNumber((prev) => prev + 1)}
-          setRoundInProgress={setRoundInProgress}
-          increaseScore={increaseScore}
-          turn={turn}
-          setTurn={setTurn}
-          questionCompleted={questionCompleted}
-          setQuestionCompleted={setQuestionCompleted}
-          numQuestionsSeen={numQuestionsSeen}
-          currentTriviaIdx={currentTriviaIdx}
-          setCurrentTriviaIdx={setCurrentTriviaIdx}
-        />
+        <div className="round">
+          <Trivia
+            question={trivia[currentTriviaIdx].question}
+            choices={trivia[currentTriviaIdx].choices}
+            correctAnswer={trivia[currentTriviaIdx].correctAnswer}
+            id={trivia[currentTriviaIdx].id}
+            seen={seen}
+            team={turn}
+            teamNames={{ [TEAM_ONE]: teamOneName, [TEAM_TWO]: teamTwoName }}
+            increaseScore={increaseScore}
+            questionCompleted={questionCompleted}
+            setQuestionCompleted={setQuestionCompleted}
+          />
+          {questionCompleted && (
+            <button onClick={nextQuestion}>Next Question</button>
+          )}
+        </div>
       ) : (
         <CategorySelector
           initialCategories={categories}
