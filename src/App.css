@@ -6,3 +6,24 @@
   padding: var(--default-page-padding);
   text-align: center;
 }
+
+.button {
+  border-radius: 8px;
+  border: 0.8px solid;
+  padding: 4px 8px;
+  background: transparent;
+}
+
+.button_submit {
+  color: white;
+  font-size: 1rem;
+  padding: 6px 10px;
+  background: #4d5b9e;
+}
+
+.text-input {
+  border-radius: 8px;
+  border: 0.8px solid;
+  padding: 4px 8px;
+  font-size: 1rem;
+}
