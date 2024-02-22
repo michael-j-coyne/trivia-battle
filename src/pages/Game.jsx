@@ -82,6 +82,10 @@ export default function Game() {
     setQuestionsPerRound(Number(params.get("questions")));
   }, []);
 
+  useEffect(() => {
+    trivia && setCurrentTriviaIdx(firstUnseenTriviaIdx(trivia, seen.current));
+  }, [trivia]);
+
   function increaseScore({ team, amount }) {
     setScore((prevScore) => ({
       ...prevScore,
@@ -92,7 +96,10 @@ export default function Game() {
   const swapTurn = () =>
     setTurn((prevTurn) => (prevTurn === TEAM_ONE ? TEAM_TWO : TEAM_ONE));
 
-  function nextQuestion() {
+  const firstUnseenTriviaIdx = (triviaArray, seenSet) =>
+    triviaArray.findIndex((item) => !seenSet.has(item.id));
+
+  async function nextQuestion(trivia) {
     if (!trivia) return;
     if (numQuestionsSeen.current === questionsPerRound) {
       setCurrRoundNumber((prev) => prev + 1);
@@ -100,19 +107,20 @@ export default function Game() {
       return;
     }
 
-    setCurrentTriviaIdx((prevIdx) => {
-      let newIdx = prevIdx + 1;
+    // I'm not handling 429 too many requests... which seems like it could
+    // be a problem here
+    const newQuestionIdx = firstUnseenTriviaIdx(trivia, seen.current);
+    if (newQuestionIdx === -1) {
+      const newTrivia = await fetchTrivia({
+        amount: numQuestionsToFetch,
+        categories: categories,
+        difficulties: "easy,medium,hard",
+      }).catch((e) => console.error(e));
+      setTrivia(newTrivia);
+      return nextQuestion(newTrivia);
+    }
 
-      while (newIdx < trivia.length) {
-        if (seen.current.has(trivia[newIdx].id)) {
-          newIdx++;
-        } else {
-          break;
-        }
-      }
-
-      return newIdx;
-    });
+    setCurrentTriviaIdx(newQuestionIdx);
     numQuestionsSeen.current = numQuestionsSeen.current + 1;
     swapTurn();
     setQuestionCompleted(false);
@@ -154,7 +162,7 @@ export default function Game() {
             setQuestionCompleted={setQuestionCompleted}
           />
           {questionCompleted && (
-            <button onClick={nextQuestion}>Next Question</button>
+            <button onClick={() => nextQuestion(trivia)}>Next Question</button>
           )}
         </div>
       ) : (
