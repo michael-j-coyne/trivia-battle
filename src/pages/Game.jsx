@@ -12,7 +12,7 @@
   I'll implement this page first, using some data from a .json file so I can focus on the game flow and ignore the fetching logic for now.
   */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TEAM_ONE, TEAM_TWO } from "../consts";
 import Round from "../components/Round";
@@ -23,6 +23,11 @@ import "./game.css";
 const numQuestionsToFetch = 50;
 
 export default function Game() {
+  const [turn, setTurn] = useState(TEAM_ONE);
+  const [questionCompleted, setQuestionCompleted] = useState(false);
+  const numQuestionsSeen = useRef(1);
+  const [currentTriviaIdx, setCurrentTriviaIdx] = useState(0);
+
   const [teamOneName, setTeamOneName] = useState("");
   const [teamTwoName, setTeamTwoName] = useState("");
   const [totalRounds, setTotalRounds] = useState(1);
@@ -49,6 +54,14 @@ export default function Game() {
       params.has("questions")
     );
   }
+
+  useEffect(() => {
+    // reset stuff
+    setTurn(currRoundNumber % 2 == 0 ? TEAM_TWO : TEAM_ONE);
+    setQuestionCompleted(false);
+    numQuestionsSeen.current = 1;
+    setCurrentTriviaIdx(0);
+  }, [currRoundNumber]);
 
   useEffect(() => {
     if (!isSaveGame() && !hasRequiredQueryParams()) {
@@ -104,6 +117,13 @@ export default function Game() {
           incrementRound={() => setCurrRoundNumber((prev) => prev + 1)}
           setRoundInProgress={setRoundInProgress}
           increaseScore={increaseScore}
+          turn={turn}
+          setTurn={setTurn}
+          questionCompleted={questionCompleted}
+          setQuestionCompleted={setQuestionCompleted}
+          numQuestionsSeen={numQuestionsSeen}
+          currentTriviaIdx={currentTriviaIdx}
+          setCurrentTriviaIdx={setCurrentTriviaIdx}
         />
       ) : (
         <CategorySelector

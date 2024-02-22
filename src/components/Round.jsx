@@ -1,22 +1,22 @@
 import "./round.css";
 import { TEAM_ONE, TEAM_TWO } from "../consts";
-import { useState, useRef } from "react";
 import Trivia from "./Trivia";
 
 export default function Round({
   trivia,
-  startingTeam, // int
   teamNames, // { [TEAM_ONE]: teamOneName, [TEAM_TWO]: teamTwoName }
   numQuestionsInRound, // int
   incrementRound, // function(void)
   setRoundInProgress, // function,
   increaseScore, // function
+  turn,
+  setTurn,
+  questionCompleted,
+  setQuestionCompleted,
+  numQuestionsSeen,
+  currentTriviaIdx,
+  setCurrentTriviaIdx,
 }) {
-  const [turn, setTurn] = useState(startingTeam);
-  const [questionCompleted, setQuestionCompleted] = useState(false);
-  const numQuestionsSeen = useRef(1);
-  const [currentTriviaIdx, setCurrentTriviaIdx] = useState(0);
-
   const swapTurn = () =>
     setTurn((prevTurn) => (prevTurn === TEAM_ONE ? TEAM_TWO : TEAM_ONE));
 
