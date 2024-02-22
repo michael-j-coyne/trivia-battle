@@ -10,6 +10,7 @@ export default function Trivia({
   team,
   teamNames,
   increaseScore,
+  questionCompleted,
   setQuestionCompleted,
 }) {
   const [isStealMode, setIsStealMode] = useState(false);
@@ -58,14 +59,14 @@ export default function Trivia({
             ? " trivia__choice_correct"
             : " trivia__choice_incorrect"
           : "") +
-        (stolenAns && selectedAns && choice !== correctAnswer
+        (questionCompleted && choice !== correctAnswer
           ? " trivia__choice_faded"
           : "") +
-        (stolenAns && selectedAns && choice === correctAnswer
+        (questionCompleted && choice === correctAnswer
           ? " trivia__choice_correct"
           : "")
       }
-      disabled={stolenAns || selectedAns?.answer === choice ? true : false}
+      disabled={questionCompleted || choice === selectedAns?.answer}
       key={idx}
     >
       {choice}

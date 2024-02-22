@@ -46,6 +46,7 @@ export default function Round({
         team={turn}
         teamNames={teamNames}
         increaseScore={increaseScore}
+        questionCompleted={questionCompleted}
         setQuestionCompleted={setQuestionCompleted}
       />
       {questionCompleted && (
