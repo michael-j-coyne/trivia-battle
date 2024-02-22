@@ -17,6 +17,7 @@ export default function CategorySelector({
   initialCategories,
   handleSubmit,
   teamName,
+  currRoundNumber,
   buttonText,
 }) {
   const [selectedCategoryIDs, setSelectedCategoryIDs] =
@@ -49,7 +50,7 @@ export default function CategorySelector({
   return (
     <div className="category-selector">
       <h1 className="category-selector__title">
-        {teamName}, select categories!
+        Round {currRoundNumber}! {teamName}, select categories!
       </h1>
       <div className="category-selector__options-container">
         {categoryOptionElems}

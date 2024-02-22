@@ -86,6 +86,7 @@ export default function Game() {
           initialCategories={categories}
           handleSubmit={handleCategorySubmit}
           teamName={currRoundNumber % 2 == 0 ? teamTwoName : teamOneName}
+          currRoundNumber={currRoundNumber}
           buttonText={
             currRoundNumber == 1
               ? "Start game"
