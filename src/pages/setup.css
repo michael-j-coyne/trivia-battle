@@ -1,0 +1,24 @@
+.setup {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.setup__name-selector__button {
+  width: 130px;
+  height: 50px;
+  font-size: 1.25rem;
+}
+
+.setup__next-back-container {
+  display: flex;
+  gap: 10px;
+}
+
+.setup__select-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
