@@ -51,6 +51,7 @@ export default function Game() {
 
   return (
     <div className="game">
+      <span>{`${teamOneName}: ${score[TEAM_ONE]}pts - ${teamTwoName}: ${score[TEAM_TWO]}pts`}</span>
       {roundInProgress ? (
         <Round
           trivia={trivia}
