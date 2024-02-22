@@ -140,7 +140,13 @@ export default function Setup() {
                 </div>
                 <div className="setup__next-back-container">
                   <BackButton handleClick={goBack} />
-                  <Link to="/game">
+                  <Link
+                    to={`/game?teamone=${encodeURIComponent(
+                      teamOneName
+                    )}&teamtwo=${encodeURIComponent(
+                      teamTwoName
+                    )}&rounds=${numRounds}&questions=${numQuestionsPerRound}`}
+                  >
                     <button className="button button_submit setup__name-selector__button">
                       Start
                     </button>

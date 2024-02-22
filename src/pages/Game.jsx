@@ -13,6 +13,7 @@
   */
 
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { TEAM_ONE, TEAM_TWO } from "../consts";
 import Round from "../components/Round";
 import CategorySelector from "../components/CategorySelector";
@@ -31,6 +32,14 @@ export default function Game() {
   const [categories, setCategories] = useState("");
   const [roundInProgress, setRoundInProgress] = useState(false);
   const [score, setScore] = useState({ [TEAM_ONE]: 0, [TEAM_TWO]: 0 });
+
+  let location = useLocation();
+  let params = new URLSearchParams(location.search);
+
+  console.log(params.get("teamone"));
+  console.log(params.get("teamtwo"));
+  console.log(params.get("rounds"));
+  console.log(params.get("questions"));
 
   const gameCompleted = currRoundNumber > totalRounds;
 
