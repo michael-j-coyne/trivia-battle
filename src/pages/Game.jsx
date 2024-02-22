@@ -28,6 +28,7 @@ export default function Game() {
   const numQuestionsSeen = useRef(1);
   const [currentTriviaIdx, setCurrentTriviaIdx] = useState(0);
 
+  const seen = useRef(new Set());
   const [teamOneName, setTeamOneName] = useState("");
   const [teamTwoName, setTeamTwoName] = useState("");
   const [totalRounds, setTotalRounds] = useState(1);
@@ -111,7 +112,7 @@ export default function Game() {
       ) : roundInProgress ? (
         <Round
           trivia={trivia}
-          startingTeam={currRoundNumber % 2 == 0 ? TEAM_TWO : TEAM_ONE}
+          seen={seen}
           teamNames={{ [TEAM_ONE]: teamOneName, [TEAM_TWO]: teamTwoName }}
           numQuestionsInRound={questionsPerRound}
           incrementRound={() => setCurrRoundNumber((prev) => prev + 1)}

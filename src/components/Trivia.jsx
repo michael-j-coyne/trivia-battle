@@ -7,6 +7,8 @@ export default function Trivia({
   question,
   choices,
   correctAnswer,
+  id,
+  seen,
   team,
   teamNames,
   increaseScore,
@@ -22,6 +24,10 @@ export default function Trivia({
     setStolenAns();
     setIsStealMode(false);
   }, [question]);
+
+  useEffect(() => {
+    seen.current.add(id);
+  }, [id]);
 
   const oppositeTeam = (team) => Number(!team);
 

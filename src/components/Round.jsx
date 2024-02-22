@@ -5,6 +5,7 @@ import Trivia from "./Trivia";
 export default function Round({
   trivia,
   teamNames, // { [TEAM_ONE]: teamOneName, [TEAM_TWO]: teamTwoName }
+  seen,
   numQuestionsInRound, // int
   incrementRound, // function(void)
   setRoundInProgress, // function,
@@ -28,8 +29,19 @@ export default function Round({
       return;
     }
 
-    // Logic for checking if question has been seen will go here-ish
-    setCurrentTriviaIdx((prevIdx) => prevIdx + 1);
+    setCurrentTriviaIdx((prevIdx) => {
+      let newIdx = prevIdx + 1;
+
+      while (newIdx < trivia.length) {
+        if (seen.current.has(trivia[newIdx].id)) {
+          newIdx++;
+        } else {
+          break;
+        }
+      }
+
+      return newIdx;
+    });
     numQuestionsSeen.current = numQuestionsSeen.current + 1;
     swapTurn();
     setQuestionCompleted(false);
@@ -41,6 +53,8 @@ export default function Round({
         question={trivia[currentTriviaIdx].question}
         choices={trivia[currentTriviaIdx].choices}
         correctAnswer={trivia[currentTriviaIdx].correctAnswer}
+        id={trivia[currentTriviaIdx].id}
+        seen={seen}
         team={turn}
         teamNames={teamNames}
         increaseScore={increaseScore}
