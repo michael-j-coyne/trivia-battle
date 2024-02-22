@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./setup.css";
 
 const screens = ["pickTeamOneName", "pickTeamTwoName", "pickNumRounds"];
+const nameLengthLimit = 20;
 
 function NameSelector({ name, setName, title }) {
   return (
@@ -10,7 +11,9 @@ function NameSelector({ name, setName, title }) {
       <h1>{title}</h1>
       <input
         className="text-input"
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) =>
+          e.target.value.length <= nameLengthLimit && setName(e.target.value)
+        }
         type="text"
         value={name}
       ></input>
