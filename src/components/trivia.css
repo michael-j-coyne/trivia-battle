@@ -37,3 +37,15 @@
 
   font-size: 1.25rem;
 }
+
+.trivia__choice_correct {
+  background: #94d7a2;
+}
+
+.trivia__choice_incorrect {
+  background: #f8bcbc;
+}
+
+.trivia__choice_faded {
+  opacity: 0.35;
+}

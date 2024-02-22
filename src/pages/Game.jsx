@@ -13,6 +13,7 @@
   */
 
 import { useState, useEffect } from "react";
+import { TEAM_ONE, TEAM_TWO } from "../consts";
 import Round from "../components/Round";
 import CategorySelector from "../components/CategorySelector";
 import fetchTrivia from "../fetchTrivia";
@@ -27,6 +28,14 @@ export default function Game() {
   const [currRoundNumber, setCurrRoundNumber] = useState(1);
   const [categories, setCategories] = useState("");
   const [roundInProgress, setRoundInProgress] = useState(false);
+  const [score, setScore] = useState({ [TEAM_ONE]: 0, [TEAM_TWO]: 0 });
+
+  function increaseScore({ team, amount }) {
+    setScore((prevScore) => ({
+      ...prevScore,
+      [team]: prevScore[team] + amount,
+    }));
+  }
 
   function handleCategorySubmit(categoryIdArr) {
     setCategories(categoryIdArr);
@@ -45,9 +54,12 @@ export default function Game() {
       {roundInProgress ? (
         <Round
           trivia={trivia}
+          startingTeam={currRoundNumber % 2 == 0 ? TEAM_TWO : TEAM_ONE}
+          teamNames={{ [TEAM_ONE]: teamOneName, [TEAM_TWO]: teamTwoName }}
           numQuestionsInRound={10}
           incrementRound={() => setCurrRoundNumber((prev) => prev + 1)}
           setRoundInProgress={setRoundInProgress}
+          increaseScore={increaseScore}
         />
       ) : (
         <CategorySelector
