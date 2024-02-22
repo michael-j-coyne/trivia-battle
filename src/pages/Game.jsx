@@ -12,8 +12,8 @@
   I'll implement this page first, using some data from a .json file so I can focus on the game flow and ignore the fetching logic for now.
   */
 
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TEAM_ONE, TEAM_TWO } from "../consts";
 import Round from "../components/Round";
 import CategorySelector from "../components/CategorySelector";
@@ -21,27 +21,51 @@ import fetchTrivia from "../fetchTrivia";
 import "./game.css";
 
 const numQuestionsToFetch = 50;
-const totalRounds = 2;
-const questionsPerRound = 1;
 
 export default function Game() {
-  const teamOneName = "Team 1";
-  const teamTwoName = "Team 2";
+  const [teamOneName, setTeamOneName] = useState("");
+  const [teamTwoName, setTeamTwoName] = useState("");
+  const [totalRounds, setTotalRounds] = useState(1);
+  const [questionsPerRound, setQuestionsPerRound] = useState(1);
   const [trivia, setTrivia] = useState();
   const [currRoundNumber, setCurrRoundNumber] = useState(1);
   const [categories, setCategories] = useState("");
   const [roundInProgress, setRoundInProgress] = useState(false);
   const [score, setScore] = useState({ [TEAM_ONE]: 0, [TEAM_TWO]: 0 });
-
+  const gameCompleted = currRoundNumber > totalRounds;
+  const navigate = useNavigate();
   let location = useLocation();
   let params = new URLSearchParams(location.search);
 
-  console.log(params.get("teamone"));
-  console.log(params.get("teamtwo"));
-  console.log(params.get("rounds"));
-  console.log(params.get("questions"));
+  function isSaveGame() {
+    return false;
+  }
 
-  const gameCompleted = currRoundNumber > totalRounds;
+  function hasRequiredQueryParams() {
+    return (
+      params.has("teamone") &&
+      params.has("teamtwo") &&
+      params.has("rounds") &&
+      params.has("questions")
+    );
+  }
+
+  useEffect(() => {
+    if (!isSaveGame() && !hasRequiredQueryParams()) {
+      console.log("navigating");
+      navigate("/setup");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!hasRequiredQueryParams()) return;
+    // I could validate input here. However, if the user of the game
+    // wants to pass bad data, they're more than welcome. It only hurts them after all!
+    setTeamOneName(params.get("teamone"));
+    setTeamTwoName(params.get("teamtwo"));
+    setTotalRounds(params.get("rounds"));
+    setQuestionsPerRound(params.get("questions"));
+  }, []);
 
   function increaseScore({ team, amount }) {
     setScore((prevScore) => ({
