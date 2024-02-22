@@ -32,6 +32,8 @@ export default function Game() {
   const [roundInProgress, setRoundInProgress] = useState(false);
   const [score, setScore] = useState({ [TEAM_ONE]: 0, [TEAM_TWO]: 0 });
 
+  const gameCompleted = currRoundNumber > totalRounds;
+
   function increaseScore({ team, amount }) {
     setScore((prevScore) => ({
       ...prevScore,
@@ -54,7 +56,13 @@ export default function Game() {
   return (
     <div className="game">
       <span>{`${teamOneName}: ${score[TEAM_ONE]}pts - ${teamTwoName}: ${score[TEAM_TWO]}pts`}</span>
-      {roundInProgress ? (
+      {gameCompleted ? (
+        <h1>
+          {score[TEAM_ONE] > score[TEAM_TWO] && `${teamOneName} wins!`}
+          {score[TEAM_TWO] > score[TEAM_ONE] && `${teamTwoName} wins!`}
+          {score[TEAM_ONE] === score[TEAM_TWO] && "Its a tie!"}
+        </h1>
+      ) : roundInProgress ? (
         <Round
           trivia={trivia}
           startingTeam={currRoundNumber % 2 == 0 ? TEAM_TWO : TEAM_ONE}
