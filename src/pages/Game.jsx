@@ -63,8 +63,8 @@ export default function Game() {
     // wants to pass bad data, they're more than welcome. It only hurts them after all!
     setTeamOneName(params.get("teamone"));
     setTeamTwoName(params.get("teamtwo"));
-    setTotalRounds(params.get("rounds"));
-    setQuestionsPerRound(params.get("questions"));
+    setTotalRounds(Number(params.get("rounds")));
+    setQuestionsPerRound(Number(params.get("questions")));
   }, []);
 
   function increaseScore({ team, amount }) {
