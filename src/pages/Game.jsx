@@ -46,18 +46,7 @@ export default function Game() {
   let location = useLocation();
   let params = new URLSearchParams(location.search);
 
-  if (gameCompleted) {
-    let winner;
-
-    if (score[TEAM_ONE] > score[TEAM_TWO]) {
-      winner = teamOneName;
-    } else if (score[TEAM_ONE] < score[TEAM_TWO]) {
-      winner = teamTwoName;
-    } else {
-      winner = "none";
-    }
-    navigate(`/win?winner=${encodeURIComponent(winner)}`);
-  }
+  useEffect(() => {});
 
   function isSaveGame() {
     return Boolean(localStorage.getItem("saveData"));
@@ -127,8 +116,21 @@ export default function Game() {
       }
       return;
     }
+    if (gameCompleted) {
+      let winner;
 
-    save();
+      if (score[TEAM_ONE] > score[TEAM_TWO]) {
+        winner = teamOneName;
+      } else if (score[TEAM_ONE] < score[TEAM_TWO]) {
+        winner = teamTwoName;
+      } else {
+        winner = "none";
+      }
+      localStorage.removeItem("saveData");
+      navigate(`/win?winner=${encodeURIComponent(winner)}`);
+    } else {
+      save();
+    }
   }, [
     turn,
     questionCompleted,
@@ -158,7 +160,7 @@ export default function Game() {
   // handle redirects
   useEffect(() => {
     if (!isSaveGame() && !hasRequiredQueryParams()) {
-      navigate("/setup");
+      if (!gameCompleted) navigate("/setup");
     } else if (isSaveGame()) {
       console.log("saveData found");
       // navigate("/continue");
