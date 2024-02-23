@@ -243,18 +243,19 @@ export default function Game() {
             setQuestionCompleted={setQuestionCompleted}
           />
 
-          <button
-            style={{
-              height: "30px",
-              fontSize: "1rem",
-              marginTop: "10px",
-              visibility: questionCompleted ? "visible" : "hidden",
-            }}
-            className="button button_submit"
-            onClick={() => nextQuestion(trivia)}
-          >
-            Next Question
-          </button>
+          {questionCompleted && (
+            <button
+              style={{
+                height: "30px",
+                fontSize: "1rem",
+                marginTop: "10px",
+              }}
+              className="button button_submit"
+              onClick={() => nextQuestion(trivia)}
+            >
+              Next Question
+            </button>
+          )}
         </div>
       ) : (
         <CategorySelector
