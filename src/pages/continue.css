@@ -1,0 +1,17 @@
+.continue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.continue__button {
+  width: 135px;
+  height: 80px;
+  font-size: 1.5rem;
+}
+
+.continue__button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
