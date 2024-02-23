@@ -15,7 +15,7 @@
 }
 
 .trivia__title {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .trivia__choice-container {
@@ -34,7 +34,7 @@
   border-radius: 8px;
   border: 0.8px solid #4d5b9e;
   min-height: 50px;
-  padding: 4px;
+  padding: 8px;
   font-size: 1rem;
 }
 
