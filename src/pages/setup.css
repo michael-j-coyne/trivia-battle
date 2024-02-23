@@ -1,4 +1,11 @@
 .setup {
+  height: calc(85vh - 2 * var(--default-page-padding));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.setup__content-container {
   display: flex;
   flex-direction: column;
   height: 300px;

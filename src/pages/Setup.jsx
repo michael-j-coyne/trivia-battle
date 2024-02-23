@@ -68,119 +68,121 @@ export default function Setup() {
 
   return (
     <div className="setup">
-      {(() => {
-        switch (screens[currIdx]) {
-          case "pickTeamOneName":
-            return (
-              <>
-                <NameSelector
-                  name={teamOneName}
-                  setName={setTeamOneName}
-                  title={
-                    <>
-                      Team one,
-                      <br />
-                      pick a name!
-                    </>
-                  }
-                />
-                <NextButton
-                  handleClick={() => {
-                    if (teamOneName === "") {
-                      // should show error to user
-                      return;
+      <div className="setup__content-container">
+        {(() => {
+          switch (screens[currIdx]) {
+            case "pickTeamOneName":
+              return (
+                <>
+                  <NameSelector
+                    name={teamOneName}
+                    setName={setTeamOneName}
+                    title={
+                      <>
+                        Team one,
+                        <br />
+                        pick a name!
+                      </>
                     }
-                    nextScreen();
-                  }}
-                />
-              </>
-            );
-          case "pickTeamTwoName":
-            return (
-              <>
-                <NameSelector
-                  name={teamTwoName}
-                  setName={setTeamTwoName}
-                  title={
-                    <>
-                      Team two,
-                      <br />
-                      pick a name!
-                    </>
-                  }
-                />
-                <div className="setup__next-back-container">
-                  <BackButton handleClick={goBack} />
+                  />
                   <NextButton
                     handleClick={() => {
-                      if (teamTwoName === "" || teamTwoName === teamOneName) {
+                      if (teamOneName === "") {
                         // should show error to user
                         return;
                       }
-                      navigate(
-                        `/game?teamone=${encodeURIComponent(
-                          teamOneName
-                        )}&teamtwo=${encodeURIComponent(teamTwoName)}`
-                      );
-                      // nextScreen();
+                      nextScreen();
                     }}
                   />
-                </div>
-              </>
-            );
-          // case "pickNumRounds":
-          //   return (
-          //     <>
-          //       <h1>
-          //         Pick the number of rounds & the number of questions per round!
-          //       </h1>
-          //       <div className="setup__select-container">
-          //         <label htmlFor="num-rounds-select">Number of rounds</label>
-          //         <select
-          //           value={numRounds}
-          //           onChange={(e) => setNumRounds(e.target.value)}
-          //           id="num-rounds-select"
-          //         >
-          //           <option value="1">1</option>
-          //           <option value="2">2</option>
-          //           <option value="3">3</option>
-          //           <option value="4">4</option>
-          //         </select>
-          //       </div>
-          //       <div className="setup__select-container">
-          //         <label htmlFor="num-questions-select">
-          //           <em>Total</em> number of questions per round
-          //         </label>
-          //         <select
-          //           value={numQuestionsPerRound}
-          //           onChange={(e) => setNumQuestionsPerRound(e.target.value)}
-          //           id="num-questions-select"
-          //         >
-          //           {Array.from({ length: 10 }).map((val, idx) => (
-          //             <option key={idx} value={idx * 2 + 2}>
-          //               {idx * 2 + 2}
-          //             </option>
-          //           ))}
-          //         </select>
-          //       </div>
-          //       <div className="setup__next-back-container">
-          //         <BackButton handleClick={goBack} />
-          //         <Link
-          //           to={`/game?teamone=${encodeURIComponent(
-          //             teamOneName
-          //           )}&teamtwo=${encodeURIComponent(
-          //             teamTwoName
-          //           )}&rounds=${numRounds}&questions=${numQuestionsPerRound}`}
-          //         >
-          //           <button className="button button_submit setup__name-selector__button">
-          //             Start
-          //           </button>
-          //         </Link>
-          //       </div>
-          //     </>
-          //   );
-        }
-      })()}
+                </>
+              );
+            case "pickTeamTwoName":
+              return (
+                <>
+                  <NameSelector
+                    name={teamTwoName}
+                    setName={setTeamTwoName}
+                    title={
+                      <>
+                        Team two,
+                        <br />
+                        pick a name!
+                      </>
+                    }
+                  />
+                  <div className="setup__next-back-container">
+                    <BackButton handleClick={goBack} />
+                    <NextButton
+                      handleClick={() => {
+                        if (teamTwoName === "" || teamTwoName === teamOneName) {
+                          // should show error to user
+                          return;
+                        }
+                        navigate(
+                          `/game?teamone=${encodeURIComponent(
+                            teamOneName
+                          )}&teamtwo=${encodeURIComponent(teamTwoName)}`
+                        );
+                        // nextScreen();
+                      }}
+                    />
+                  </div>
+                </>
+              );
+            // case "pickNumRounds":
+            //   return (
+            //     <>
+            //       <h1>
+            //         Pick the number of rounds & the number of questions per round!
+            //       </h1>
+            //       <div className="setup__select-container">
+            //         <label htmlFor="num-rounds-select">Number of rounds</label>
+            //         <select
+            //           value={numRounds}
+            //           onChange={(e) => setNumRounds(e.target.value)}
+            //           id="num-rounds-select"
+            //         >
+            //           <option value="1">1</option>
+            //           <option value="2">2</option>
+            //           <option value="3">3</option>
+            //           <option value="4">4</option>
+            //         </select>
+            //       </div>
+            //       <div className="setup__select-container">
+            //         <label htmlFor="num-questions-select">
+            //           <em>Total</em> number of questions per round
+            //         </label>
+            //         <select
+            //           value={numQuestionsPerRound}
+            //           onChange={(e) => setNumQuestionsPerRound(e.target.value)}
+            //           id="num-questions-select"
+            //         >
+            //           {Array.from({ length: 10 }).map((val, idx) => (
+            //             <option key={idx} value={idx * 2 + 2}>
+            //               {idx * 2 + 2}
+            //             </option>
+            //           ))}
+            //         </select>
+            //       </div>
+            //       <div className="setup__next-back-container">
+            //         <BackButton handleClick={goBack} />
+            //         <Link
+            //           to={`/game?teamone=${encodeURIComponent(
+            //             teamOneName
+            //           )}&teamtwo=${encodeURIComponent(
+            //             teamTwoName
+            //           )}&rounds=${numRounds}&questions=${numQuestionsPerRound}`}
+            //         >
+            //           <button className="button button_submit setup__name-selector__button">
+            //             Start
+            //           </button>
+            //         </Link>
+            //       </div>
+            //     </>
+            //   );
+          }
+        })()}
+      </div>
     </div>
   );
 }
