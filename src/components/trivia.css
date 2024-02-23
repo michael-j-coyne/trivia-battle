@@ -19,6 +19,7 @@
 }
 
 .trivia__choice-container {
+  width: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
@@ -32,10 +33,9 @@
 
   border-radius: 8px;
   border: 0.8px solid #4d5b9e;
-  min-width: 64px;
-  padding: 16px;
-
-  font-size: 1.25rem;
+  min-height: 50px;
+  padding: 4px;
+  font-size: 1rem;
 }
 
 .trivia__choice_correct {
