@@ -1,6 +1,9 @@
 import "./continue.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Continue() {
+  const navigate = useNavigate();
+
   return (
     <div className="continue">
       <h1>
@@ -12,8 +15,20 @@ export default function Continue() {
         <br />
       </h1>
       <div className="continue__button-container">
-        <button className="button  continue__button">New game</button>
-        <button className="button button_submit continue__button">
+        <button
+          onClick={() => {
+            localStorage.setItem("oldData", localStorage.getItem("saveData"));
+            localStorage.removeItem("saveData");
+            navigate("/setup");
+          }}
+          className="button  continue__button"
+        >
+          New game
+        </button>
+        <button
+          onClick={() => navigate("/game")}
+          className="button button_submit continue__button"
+        >
           Continue
         </button>
       </div>
