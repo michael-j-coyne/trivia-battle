@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./setup.css";
 
@@ -49,6 +49,7 @@ export default function Setup() {
   const [numRounds, setNumRounds] = useState(2);
   const [numQuestionsPerRound, setNumQuestionsPerRound] = useState(8);
   const [currIdx, setCurrIdx] = useState(0);
+  const navigate = useNavigate();
 
   function nextScreen() {
     setCurrIdx((prevIdx) => (prevIdx < 2 ? prevIdx + 1 : prevIdx));
@@ -97,63 +98,68 @@ export default function Setup() {
                         // should show error to user
                         return;
                       }
-                      nextScreen();
+                      navigate(
+                        `/game?teamone=${encodeURIComponent(
+                          teamOneName
+                        )}&teamtwo=${encodeURIComponent(teamTwoName)}`
+                      );
+                      // nextScreen();
                     }}
                   />
                 </div>
               </>
             );
-          case "pickNumRounds":
-            return (
-              <>
-                <h1>
-                  Pick the number of rounds & the number of questions per round!
-                </h1>
-                <div className="setup__select-container">
-                  <label htmlFor="num-rounds-select">Number of rounds</label>
-                  <select
-                    value={numRounds}
-                    onChange={(e) => setNumRounds(e.target.value)}
-                    id="num-rounds-select"
-                  >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                  </select>
-                </div>
-                <div className="setup__select-container">
-                  <label htmlFor="num-questions-select">
-                    <em>Total</em> number of questions per round
-                  </label>
-                  <select
-                    value={numQuestionsPerRound}
-                    onChange={(e) => setNumQuestionsPerRound(e.target.value)}
-                    id="num-questions-select"
-                  >
-                    {Array.from({ length: 10 }).map((val, idx) => (
-                      <option key={idx} value={idx * 2 + 2}>
-                        {idx * 2 + 2}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="setup__next-back-container">
-                  <BackButton handleClick={goBack} />
-                  <Link
-                    to={`/game?teamone=${encodeURIComponent(
-                      teamOneName
-                    )}&teamtwo=${encodeURIComponent(
-                      teamTwoName
-                    )}&rounds=${numRounds}&questions=${numQuestionsPerRound}`}
-                  >
-                    <button className="button button_submit setup__name-selector__button">
-                      Start
-                    </button>
-                  </Link>
-                </div>
-              </>
-            );
+          // case "pickNumRounds":
+          //   return (
+          //     <>
+          //       <h1>
+          //         Pick the number of rounds & the number of questions per round!
+          //       </h1>
+          //       <div className="setup__select-container">
+          //         <label htmlFor="num-rounds-select">Number of rounds</label>
+          //         <select
+          //           value={numRounds}
+          //           onChange={(e) => setNumRounds(e.target.value)}
+          //           id="num-rounds-select"
+          //         >
+          //           <option value="1">1</option>
+          //           <option value="2">2</option>
+          //           <option value="3">3</option>
+          //           <option value="4">4</option>
+          //         </select>
+          //       </div>
+          //       <div className="setup__select-container">
+          //         <label htmlFor="num-questions-select">
+          //           <em>Total</em> number of questions per round
+          //         </label>
+          //         <select
+          //           value={numQuestionsPerRound}
+          //           onChange={(e) => setNumQuestionsPerRound(e.target.value)}
+          //           id="num-questions-select"
+          //         >
+          //           {Array.from({ length: 10 }).map((val, idx) => (
+          //             <option key={idx} value={idx * 2 + 2}>
+          //               {idx * 2 + 2}
+          //             </option>
+          //           ))}
+          //         </select>
+          //       </div>
+          //       <div className="setup__next-back-container">
+          //         <BackButton handleClick={goBack} />
+          //         <Link
+          //           to={`/game?teamone=${encodeURIComponent(
+          //             teamOneName
+          //           )}&teamtwo=${encodeURIComponent(
+          //             teamTwoName
+          //           )}&rounds=${numRounds}&questions=${numQuestionsPerRound}`}
+          //         >
+          //           <button className="button button_submit setup__name-selector__button">
+          //             Start
+          //           </button>
+          //         </Link>
+          //       </div>
+          //     </>
+          //   );
         }
       })()}
     </div>

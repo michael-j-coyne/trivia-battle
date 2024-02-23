@@ -49,9 +49,7 @@ export default function CategorySelector({
 
   return (
     <div className="category-selector">
-      <h1 className="category-selector__title">
-        Round {currRoundNumber}! {teamName}, select categories!
-      </h1>
+      <h1 className="category-selector__title">Select categories!</h1>
       <div className="category-selector__options-container">
         {categoryOptionElems}
       </div>

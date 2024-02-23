@@ -22,6 +22,8 @@ import "./game.css";
 import "../components/round.css";
 
 const numQuestionsToFetch = 50;
+const totalRounds = 1;
+const questionsPerRound = 10;
 
 export default function Game() {
   const [turn, setTurn] = useState(TEAM_ONE);
@@ -32,8 +34,8 @@ export default function Game() {
   const seen = useRef(new Set());
   const [teamOneName, setTeamOneName] = useState("");
   const [teamTwoName, setTeamTwoName] = useState("");
-  const [totalRounds, setTotalRounds] = useState(1);
-  const [questionsPerRound, setQuestionsPerRound] = useState(1);
+  // const [totalRounds, setTotalRounds] = useState(1);
+  // const [questionsPerRound, setQuestionsPerRound] = useState(1);
   const [trivia, setTrivia] = useState();
   const [currRoundNumber, setCurrRoundNumber] = useState(1);
   const [categories, setCategories] = useState("");
@@ -50,10 +52,9 @@ export default function Game() {
 
   function hasRequiredQueryParams() {
     return (
-      params.has("teamone") &&
-      params.has("teamtwo") &&
-      params.has("rounds") &&
-      params.has("questions")
+      params.has("teamone") && params.has("teamtwo")
+      // params.has("rounds") &&
+      // params.has("questions")
     );
   }
 
@@ -65,8 +66,8 @@ export default function Game() {
       currentTriviaIdx: currentTriviaIdx,
       teamOneName: teamOneName,
       teamTwoName: teamTwoName,
-      totalRounds: totalRounds,
-      questionsPerRound: questionsPerRound,
+      // totalRounds: totalRounds,
+      // questionsPerRound: questionsPerRound,
       trivia: trivia,
       currRoundNumber: currRoundNumber,
       categories: categories,
@@ -83,8 +84,8 @@ export default function Game() {
     setCurrentTriviaIdx(data.currentTriviaIdx);
     setTeamOneName(data.teamOneName);
     setTeamTwoName(data.teamTwoName);
-    setTotalRounds(data.totalRounds);
-    setQuestionsPerRound(data.questionsPerRound);
+    // setTotalRounds(data.totalRounds);
+    // setQuestionsPerRound(data.questionsPerRound);
     setTrivia(data.trivia);
     setCurrRoundNumber(data.currRoundNumber);
     setCategories(data.categories);
@@ -124,8 +125,8 @@ export default function Game() {
     seen.current,
     teamOneName,
     teamTwoName,
-    totalRounds,
-    questionsPerRound,
+    // totalRounds,
+    // questionsPerRound,
     trivia,
     currRoundNumber,
     categories,
@@ -158,8 +159,8 @@ export default function Game() {
     // wants to pass bad data, they're more than welcome. It only hurts them after all!
     setTeamOneName(params.get("teamone"));
     setTeamTwoName(params.get("teamtwo"));
-    setTotalRounds(Number(params.get("rounds")));
-    setQuestionsPerRound(Number(params.get("questions")));
+    // setTotalRounds(Number(params.get("rounds")));
+    // setQuestionsPerRound(Number(params.get("questions")));
   }, []);
 
   useEffect(() => {
