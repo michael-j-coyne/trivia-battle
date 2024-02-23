@@ -159,8 +159,11 @@ export default function Game() {
     // setQuestionsPerRound(Number(params.get("questions")));
   }, []);
 
+  // this is how I'm avoiding a duplicate "first" question
   useEffect(() => {
-    trivia && setCurrentTriviaIdx(firstUnseenTriviaIdx(trivia, seen.current));
+    !roundInProgress &&
+      trivia &&
+      setCurrentTriviaIdx(firstUnseenTriviaIdx(trivia, seen.current));
   }, [trivia]);
 
   function increaseScore({ team, amount }) {
