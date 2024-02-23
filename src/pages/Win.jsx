@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import "./win.css";
 
 export default function Win() {
   const location = useLocation();
@@ -26,31 +27,33 @@ export default function Win() {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "200px",
-        justifyContent: "space-between",
-      }}
-    >
-      <h1 style={{ fontSize: "2.5rem" }}>
-        {winner ? (
-          <>
-            {winningScore} - {losingScore}
-            <br />
-            {winner} win!
-          </>
-        ) : (
-          "Its a tie!"
-        )}
-      </h1>
-      <button
-        onClick={() => navigate("/setup")}
-        className="button button_submit"
+    <div className="win">
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "200px",
+          justifyContent: "space-between",
+        }}
       >
-        Play again
-      </button>
+        <h1 style={{ fontSize: "2.5rem" }}>
+          {winner ? (
+            <>
+              {winningScore} - {losingScore}
+              <br />
+              {winner} win!
+            </>
+          ) : (
+            "Its a tie!"
+          )}
+        </h1>
+        <button
+          onClick={() => navigate("/setup")}
+          className="button button_submit"
+        >
+          Play again
+        </button>
+      </div>
     </div>
   );
 }
