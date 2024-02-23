@@ -95,11 +95,10 @@ export default function Game() {
       // load data from save if it exists
       if (isSaveGame()) {
         fromJson(localStorage.getItem("saveData"));
-
-        let seenQuestions = localStorage.getItem("seenQuestions");
-        const dataToSave = new Set(JSON.parse(seenQuestions));
-        seen.current = seenQuestions ? dataToSave : seen.current;
       }
+      let seenQuestions = localStorage.getItem("seenQuestions");
+      const dataToSave = new Set(JSON.parse(seenQuestions));
+      seen.current = seenQuestions ? dataToSave : seen.current;
       return;
     }
     if (gameCompleted) {
