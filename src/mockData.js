@@ -1,5 +1,17 @@
 export const stuff = [
   {
+    id: "6244374b746187c5e7be9344",
+    correctAnswer:
+      "It is used as a solvent for lacquer, floor polishes and resins.",
+    choices: [
+      "It is used for surface purification, bleaching, odour removal and water disinfection.",
+      "It is used in manufacture of pulp and paper, alumina, soap and detergents.",
+      "It is used as a solvent for lacquer, floor polishes and resins.",
+      "It is used as oscillators in radios, watches.",
+    ],
+    question: "What is the chemical trichloromethane often used for?",
+  },
+  {
     id: "62433403cfaae40c12961419",
     category: "science",
     question: "What would you call a baby frog?",
