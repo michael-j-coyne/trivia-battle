@@ -46,6 +46,19 @@ export default function Game() {
   let location = useLocation();
   let params = new URLSearchParams(location.search);
 
+  if (gameCompleted) {
+    let winner;
+
+    if (score[TEAM_ONE] > score[TEAM_TWO]) {
+      winner = teamOneName;
+    } else if (score[TEAM_ONE] < score[TEAM_TWO]) {
+      winner = teamTwoName;
+    } else {
+      winner = "none";
+    }
+    navigate(`/win?winner=${encodeURIComponent(winner)}`);
+  }
+
   function isSaveGame() {
     return Boolean(localStorage.getItem("saveData"));
   }
