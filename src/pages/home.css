@@ -1,0 +1,18 @@
+.home {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  height: calc(100vh - 2 * var(--default-page-padding));
+}
+
+.home__title {
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+}
+
+.home__subtitle {
+  margin-bottom: 50px;
+  font-weight: 400;
+}

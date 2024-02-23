@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
+import "./home.css";
 
 export default function Home() {
   // On the home page, I want a brief introduction, instructions, and a link to pick categories and get started
   return (
-    <div>
-      <h1>This is the homepage</h1>
-      <p>And this is a paragraph on the homepage</p>
-      <Link to="/setup">Click here to pick a category and get started</Link>
+    <div className="home">
+      <h1 className="home__title">Trivia battle!</h1>
+      <h2 className="home__subtitle">
+        Divide into two teams, pick categories, and battle it out!
+      </h2>
+      <Link to="/setup">
+        <button className="button button_submit">Get started</button>
+      </Link>
     </div>
   );
 }
