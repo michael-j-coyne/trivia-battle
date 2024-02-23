@@ -1,3 +1,13 @@
 .game {
   height: calc(100vh - 2 * var(--default-page-padding));
 }
+
+.game__stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.game__stats-item {
+  white-space: nowrap;
+}

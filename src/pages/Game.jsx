@@ -220,7 +220,13 @@ export default function Game() {
 
   return (
     <div className="game">
-      <span>{`${teamOneName}: ${score[TEAM_ONE]}pts - ${teamTwoName}: ${score[TEAM_TWO]}pts`}</span>
+      {roundInProgress && (
+        <span className="game__stats">
+          <div className="game__stats-item">{`${teamOneName}: ${score[TEAM_ONE]}`}</div>{" "}
+          <div className="game__stats-item">{`Q ${currQuestionNumber} / ${questionsPerRound}`}</div>
+          <div className="game__stats-item">{`${teamTwoName}: ${score[TEAM_TWO]}`}</div>
+        </span>
+      )}
       {gameCompleted ? (
         <h1>
           {score[TEAM_ONE] > score[TEAM_TWO] && `${teamOneName} wins!`}
