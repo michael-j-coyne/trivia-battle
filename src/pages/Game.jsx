@@ -217,13 +217,6 @@ export default function Game() {
 
   return (
     <div className="game">
-      {roundInProgress && (
-        <span className="game__stats">
-          <div className="game__stats-item game__stats-item_t1">{`${teamOneName}: ${score[TEAM_ONE]}`}</div>{" "}
-          <div className="game__stats-item">{`Q ${currQuestionNumber} / ${questionsPerRound}`}</div>
-          <div className="game__stats-item game__stats-item_t2">{`${teamTwoName}: ${score[TEAM_TWO]}`}</div>
-        </span>
-      )}
       {gameCompleted ? (
         <h1>
           {score[TEAM_ONE] > score[TEAM_TWO] && `${teamOneName} wins!`}
@@ -232,6 +225,11 @@ export default function Game() {
         </h1>
       ) : roundInProgress ? (
         <div className="round">
+          <span className="round__stats">
+            <div className="round__stats-item round__stats-item_t1">{`${teamOneName}: ${score[TEAM_ONE]}`}</div>{" "}
+            <div className="round__stats-item">{`Q ${currQuestionNumber} / ${questionsPerRound}`}</div>
+            <div className="round__stats-item round__stats-item_t2">{`${teamTwoName}: ${score[TEAM_TWO]}`}</div>
+          </span>
           <Trivia
             question={trivia[currentTriviaIdx].question}
             choices={trivia[currentTriviaIdx].choices}
