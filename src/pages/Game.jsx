@@ -219,9 +219,9 @@ export default function Game() {
     <div className="game">
       {roundInProgress && (
         <span className="game__stats">
-          <div className="game__stats-item">{`${teamOneName}: ${score[TEAM_ONE]}`}</div>{" "}
+          <div className="game__stats-item game__stats-item_t1">{`${teamOneName}: ${score[TEAM_ONE]}`}</div>{" "}
           <div className="game__stats-item">{`Q ${currQuestionNumber} / ${questionsPerRound}`}</div>
-          <div className="game__stats-item">{`${teamTwoName}: ${score[TEAM_TWO]}`}</div>
+          <div className="game__stats-item game__stats-item_t2">{`${teamTwoName}: ${score[TEAM_TWO]}`}</div>
         </span>
       )}
       {gameCompleted ? (

@@ -3,11 +3,24 @@
 }
 
 .game__stats {
-  display: flex;
+  border: 0.8px solid;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   justify-content: space-between;
   margin-bottom: 5px;
 }
 
 .game__stats-item {
   white-space: nowrap;
+}
+
+.game__stats-item_t1 {
+  justify-self: flex-start;
+}
+
+.game__stats-item_t2 {
+  justify-self: flex-end;
 }

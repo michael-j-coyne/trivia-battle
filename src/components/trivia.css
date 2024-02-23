@@ -1,17 +1,11 @@
 .trivia {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 
   height: 100%;
   width: 100%;
-}
-
-@media screen and (orientation: landscape) {
-  .trivia {
-    justify-content: space-between;
-  }
 }
 
 .trivia__title {
