@@ -69,7 +69,13 @@ export default function Setup() {
                 <NameSelector
                   name={teamOneName}
                   setName={setTeamOneName}
-                  title="Pick a name for team one!"
+                  title={
+                    <>
+                      Team one,
+                      <br />
+                      pick a name!
+                    </>
+                  }
                 />
                 <NextButton
                   handleClick={() => {
@@ -88,7 +94,13 @@ export default function Setup() {
                 <NameSelector
                   name={teamTwoName}
                   setName={setTeamTwoName}
-                  title="Pick a name for team two!"
+                  title={
+                    <>
+                      Team two,
+                      <br />
+                      pick a name!
+                    </>
+                  }
                 />
                 <div className="setup__next-back-container">
                   <BackButton handleClick={goBack} />
