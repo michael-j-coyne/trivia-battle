@@ -6,22 +6,45 @@ export default function Win() {
 
   const params = new URLSearchParams(location.search);
 
-  const winner = params.get("winner");
+  const teamOne = params.get("teamone");
+  const teamTwo = params.get("teamtwo");
+  const teamOneScore = Number(params.get("teamonescore"));
+  const teamTwoScore = Number(params.get("teamtwoscore"));
 
-  let message;
+  let winner;
+  let winningScore;
+  let losingScore;
 
-  winner === "none" ? (message = "It's a tie!") : (message = `${winner} win!`);
+  if (teamOneScore > teamTwoScore) {
+    winner = teamOne;
+    winningScore = teamOneScore;
+    losingScore = teamTwoScore;
+  } else if (teamTwoScore > teamOneScore) {
+    winner = teamTwo;
+    winningScore = teamTwoScore;
+    losingScore = teamOneScore;
+  }
 
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
-        height: "150px",
+        height: "200px",
         justifyContent: "space-between",
       }}
     >
-      <h1 style={{ fontSize: "2.5rem" }}>{message}</h1>
+      <h1 style={{ fontSize: "2.5rem" }}>
+        {winner ? (
+          <>
+            {winningScore} - {losingScore}
+            <br />
+            {winner} win!
+          </>
+        ) : (
+          "Its a tie!"
+        )}
+      </h1>
       <button
         style={{ height: "50px", fontSize: "1.25rem" }}
         onClick={() => navigate("/setup")}

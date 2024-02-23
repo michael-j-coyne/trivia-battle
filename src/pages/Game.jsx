@@ -102,17 +102,14 @@ export default function Game() {
       return;
     }
     if (gameCompleted) {
-      let winner;
-
-      if (score[TEAM_ONE] > score[TEAM_TWO]) {
-        winner = teamOneName;
-      } else if (score[TEAM_ONE] < score[TEAM_TWO]) {
-        winner = teamTwoName;
-      } else {
-        winner = "none";
-      }
       localStorage.removeItem("saveData");
-      navigate(`/win?winner=${encodeURIComponent(winner)}`);
+      navigate(
+        `/win?teamone=${encodeURIComponent(
+          teamOneName
+        )}&teamtwo=${encodeURIComponent(teamTwoName)}&teamonescore=${
+          score[0]
+        }&teamtwoscore=${score[1]}`
+      );
     } else {
       save();
     }
