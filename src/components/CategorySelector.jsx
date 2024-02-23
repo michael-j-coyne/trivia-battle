@@ -55,7 +55,7 @@ export default function CategorySelector({
       </div>
       <button
         onClick={() => handleSubmit(selectedCategoryIDs)}
-        className="category-selector__submit"
+        className="button button_submit category-selector__submit"
       >
         {buttonText}
       </button>
