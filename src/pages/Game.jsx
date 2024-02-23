@@ -28,7 +28,7 @@ const questionsPerRound = 10;
 export default function Game() {
   const [turn, setTurn] = useState(TEAM_ONE);
   const [questionCompleted, setQuestionCompleted] = useState(false);
-  const numQuestionsSeen = useRef(1);
+  const [currQuestionNumber, setCurrQuestionNumber] = useState(1);
   const [currentTriviaIdx, setCurrentTriviaIdx] = useState(0);
 
   const seen = useRef(new Set());
@@ -62,7 +62,7 @@ export default function Game() {
     return JSON.stringify({
       turn: turn,
       questionCompleted: questionCompleted,
-      numQuestionsSeen: numQuestionsSeen.current, // this is a ref
+      currQuestionNumber: currQuestionNumber,
       currentTriviaIdx: currentTriviaIdx,
       teamOneName: teamOneName,
       teamTwoName: teamTwoName,
@@ -84,6 +84,7 @@ export default function Game() {
     setCurrentTriviaIdx(data.currentTriviaIdx);
     setTeamOneName(data.teamOneName);
     setTeamTwoName(data.teamTwoName);
+    setCurrQuestionNumber(data.currQuestionNumber);
     // setTotalRounds(data.totalRounds);
     // setQuestionsPerRound(data.questionsPerRound);
     setTrivia(data.trivia);
@@ -91,8 +92,6 @@ export default function Game() {
     setCategories(data.categories);
     setRoundInProgress(data.roundInProgress);
     setScore(data.score);
-
-    numQuestionsSeen.current = data.numQuestionsSeen;
   }
 
   function save() {
@@ -120,7 +119,7 @@ export default function Game() {
   }, [
     turn,
     questionCompleted,
-    numQuestionsSeen,
+    currQuestionNumber,
     currentTriviaIdx,
     seen.current,
     teamOneName,
@@ -139,7 +138,7 @@ export default function Game() {
     // reset stuff
     setTurn(currRoundNumber % 2 == 0 ? TEAM_TWO : TEAM_ONE);
     setQuestionCompleted(false);
-    numQuestionsSeen.current = 1;
+    setCurrQuestionNumber(1);
     setCurrentTriviaIdx(0);
   }, [currRoundNumber]);
 
@@ -182,7 +181,7 @@ export default function Game() {
 
   async function nextQuestion(trivia) {
     if (!trivia) return;
-    if (numQuestionsSeen.current === questionsPerRound) {
+    if (currQuestionNumber === questionsPerRound) {
       setCurrRoundNumber((prev) => prev + 1);
       setRoundInProgress(false);
       return;
@@ -202,7 +201,7 @@ export default function Game() {
     }
 
     setCurrentTriviaIdx(newQuestionIdx);
-    numQuestionsSeen.current = numQuestionsSeen.current + 1;
+    setCurrQuestionNumber((prev) => prev + 1);
     swapTurn();
     setQuestionCompleted(false);
   }
