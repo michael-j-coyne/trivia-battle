@@ -23,9 +23,3 @@
 .category-selector__button_selected {
   background: #d6dbf5;
 }
-
-.category-selector__submit {
-  padding: 16px;
-  font-size: 1.5rem;
-  font-weight: 700;
-}

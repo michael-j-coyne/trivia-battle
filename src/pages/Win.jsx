@@ -46,7 +46,6 @@ export default function Win() {
         )}
       </h1>
       <button
-        style={{ height: "50px", fontSize: "1.25rem" }}
         onClick={() => navigate("/setup")}
         className="button button_submit"
       >

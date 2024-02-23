@@ -247,6 +247,8 @@ export default function Game() {
 
           <button
             style={{
+              height: "30px",
+              fontSize: "1rem",
               marginTop: "10px",
               visibility: questionCompleted ? "visible" : "hidden",
             }}
