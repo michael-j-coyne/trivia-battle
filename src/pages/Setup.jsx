@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./setup.css";
 
 const screens = ["pickTeamOneName", "pickTeamTwoName", "pickNumRounds"];
-const nameLengthLimit = 20;
+const nameLengthLimit = 12;
 
 function NameSelector({ name, setName, title }) {
   return (
