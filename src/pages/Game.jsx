@@ -73,8 +73,6 @@ export default function Game() {
     setTeamOneName(data.teamOneName);
     setTeamTwoName(data.teamTwoName);
     setCurrQuestionNumber(data.currQuestionNumber);
-    // setTotalRounds(data.totalRounds);
-    // setQuestionsPerRound(data.questionsPerRound);
     setTrivia(data.trivia);
     setCurrRoundNumber(data.currRoundNumber);
     setCategories(data.categories);
@@ -130,14 +128,6 @@ export default function Game() {
     score,
     gameCompleted,
   ]);
-
-  useEffect(() => {
-    // reset stuff
-    setTurn(currRoundNumber % 2 == 0 ? TEAM_TWO : TEAM_ONE);
-    setQuestionCompleted(false);
-    setCurrQuestionNumber(1);
-    setCurrentTriviaIdx(0);
-  }, [currRoundNumber]);
 
   // handle redirects
   useEffect(() => {
