@@ -1,5 +1,5 @@
 .game {
-  height: calc(100vh - 2 * var(--default-page-padding));
+  height: calc(85vh - 2 * var(--default-page-padding));
   width: calc(100vw - 2 * var(--default-page-padding));
 }
 

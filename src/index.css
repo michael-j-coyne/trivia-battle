@@ -33,7 +33,8 @@ button {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  align-items: flex-start;
+  justify-content: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 85vh;
 }
