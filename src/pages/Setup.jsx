@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./setup.css";
 
 const screens = ["pickTeamOneName", "pickTeamTwoName", "pickNumRounds"];
@@ -50,6 +50,13 @@ export default function Setup() {
   const [numQuestionsPerRound, setNumQuestionsPerRound] = useState(8);
   const [currIdx, setCurrIdx] = useState(0);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const saveData = localStorage.getItem("saveData");
+    if (saveData) {
+      navigate("/continue");
+    }
+  }, []);
 
   function nextScreen() {
     setCurrIdx((prevIdx) => (prevIdx < 2 ? prevIdx + 1 : prevIdx));
