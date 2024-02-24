@@ -36,16 +36,13 @@ export default function Win() {
           justifyContent: "space-between",
         }}
       >
-        <h1 style={{ fontSize: "2.5rem" }}>
-          {winner ? (
-            <>
-              {winningScore} - {losingScore}
-              <br />
-              {winner} win!
-            </>
-          ) : (
-            "Its a tie!"
-          )}
+        {winner && (
+          <h2 className="game__score">
+            {winningScore} - {losingScore}
+          </h2>
+        )}
+        <h1 className="game__winner">
+          {winner ? `${winner} win!` : "Its a tie!"}
         </h1>
         <button
           onClick={() => navigate("/setup")}

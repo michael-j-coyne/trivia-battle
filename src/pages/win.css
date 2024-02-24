@@ -4,3 +4,13 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.game__score {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.game__winner {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
