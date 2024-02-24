@@ -3,6 +3,13 @@
   width: calc(100vw - 2 * var(--default-page-padding));
 }
 
+.game__next-button {
+  height: 30px;
+  font-size: 1rem;
+  margin-top: 10px;
+  padding: 0;
+}
+
 .round__stats {
   border: 0.8px solid;
   border-radius: 8px;

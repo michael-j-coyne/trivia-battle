@@ -238,12 +238,7 @@ export default function Game() {
 
           {questionCompleted && (
             <button
-              style={{
-                height: "30px",
-                fontSize: "1rem",
-                marginTop: "10px",
-              }}
-              className="button button_submit"
+              className="button button_submit game__next-button"
               onClick={() => nextQuestion(trivia)}
             >
               {currQuestionNumber === questionsPerRound
