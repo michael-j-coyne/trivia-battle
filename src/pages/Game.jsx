@@ -246,7 +246,9 @@ export default function Game() {
               className="button button_submit"
               onClick={() => nextQuestion(trivia)}
             >
-              Next Question
+              {currQuestionNumber === questionsPerRound
+                ? "Next"
+                : "Next Question"}
             </button>
           )}
         </div>

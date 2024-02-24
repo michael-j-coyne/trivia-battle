@@ -42,7 +42,7 @@ export default function Win() {
           </h2>
         )}
         <h1 className="game__winner">
-          {winner ? `${winner} win!` : "Its a tie!"}
+          {winner ? `${winner} win(s)!` : "Its a tie!"}
         </h1>
         <button
           onClick={() => navigate("/setup")}
