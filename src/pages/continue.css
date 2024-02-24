@@ -1,7 +1,9 @@
 .continue {
   display: flex;
+  height: calc(85vh - 2 * var(--default-page-padding));
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .continue__button {
