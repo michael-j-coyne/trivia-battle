@@ -20,8 +20,6 @@ export default function Game() {
   const seen = useRef(new Set());
   const [teamOneName, setTeamOneName] = useState("");
   const [teamTwoName, setTeamTwoName] = useState("");
-  // const [totalRounds, setTotalRounds] = useState(1);
-  // const [questionsPerRound, setQuestionsPerRound] = useState(1);
   const [trivia, setTrivia] = useState();
   const [currRoundNumber, setCurrRoundNumber] = useState(1);
   const [categories, setCategories] = useState("");
@@ -39,11 +37,7 @@ export default function Game() {
   }
 
   function hasRequiredQueryParams() {
-    return (
-      params.has("teamone") && params.has("teamtwo")
-      // params.has("rounds") &&
-      // params.has("questions")
-    );
+    return params.has("teamone") && params.has("teamtwo");
   }
 
   function toJson() {
@@ -54,8 +48,6 @@ export default function Game() {
       currentTriviaIdx: currentTriviaIdx,
       teamOneName: teamOneName,
       teamTwoName: teamTwoName,
-      // totalRounds: totalRounds,
-      // questionsPerRound: questionsPerRound,
       trivia: trivia,
       currRoundNumber: currRoundNumber,
       categories: categories,
@@ -119,8 +111,6 @@ export default function Game() {
     seen.current,
     teamOneName,
     teamTwoName,
-    // totalRounds,
-    // questionsPerRound,
     trivia,
     currRoundNumber,
     categories,
@@ -133,20 +123,13 @@ export default function Game() {
   useEffect(() => {
     if (!isSaveGame() && !hasRequiredQueryParams()) {
       if (!gameCompleted) navigate("/setup");
-    } else if (isSaveGame()) {
-      console.log("saveData found");
-      // navigate("/continue");
     }
   }, []);
 
   useEffect(() => {
     if (!hasRequiredQueryParams()) return;
-    // I could validate input here. However, if the user of the game
-    // wants to pass bad data, they're more than welcome. It only hurts them after all!
     setTeamOneName(params.get("teamone"));
     setTeamTwoName(params.get("teamtwo"));
-    // setTotalRounds(Number(params.get("rounds")));
-    // setQuestionsPerRound(Number(params.get("questions")));
   }, []);
 
   // this is how I'm avoiding a duplicate "first" question
