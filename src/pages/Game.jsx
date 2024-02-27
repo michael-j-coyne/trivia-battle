@@ -13,17 +13,35 @@ const questionsPerRound = 10;
 
 export default function Game() {
   const [turn, setTurn] = useState(TEAM_ONE);
+
+  // TODO: move state into TriviaItem
   const [questionCompleted, setQuestionCompleted] = useState(false);
   const [currQuestionNumber, setCurrQuestionNumber] = useState(1);
+
   const [currentTriviaIdx, setCurrentTriviaIdx] = useState(0);
 
   const seen = useRef(new Set());
+  // TODO: don't use state for teamOneName and teamTwoName
+  // I do however need to cache the value.
   const [teamOneName, setTeamOneName] = useState("");
   const [teamTwoName, setTeamTwoName] = useState("");
+
+  // I'm "pre-fetching" trivia questions so we don't have to wait for loading
   const [trivia, setTrivia] = useState();
+
+  // TODO: stop using this piece of state, since we removed "multiple rounds"
   const [currRoundNumber, setCurrRoundNumber] = useState(1);
+
+  // I use these categories to fetch questions, but they aren't exactly needed
+  // for rendering... think about this.
   const [categories, setCategories] = useState("");
+
+  // TODO: do I need this state or can I calculate the value somehow?
+  // currQuestionNumber could start as 0 and when the first question is viewed, it goes up to 1?
+  // roundInProgress = currQuestionNumber === 0
+  // ( and we dont display it in the category selector screen )
   const [roundInProgress, setRoundInProgress] = useState(false);
+
   const [score, setScore] = useState({ [TEAM_ONE]: 0, [TEAM_TWO]: 0 });
   const gameCompleted = currRoundNumber > totalRounds;
   const navigate = useNavigate();
