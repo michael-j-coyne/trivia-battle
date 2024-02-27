@@ -101,7 +101,13 @@ describe("Load saveData", () => {
       wrapper: BrowserRouter,
     });
 
-    // The "game" screen should contain the team names
+    // I need "isGameScreen()" and "isCategorySelectScreen()" and "isWinScreen()"
+    // functions
+
+    // they will take the return value of render() as an argument
+    // function isGameScreen(queries) { }
+
+    // The "game" screen should contain BOTH of the team names
     getAllByText(mockDataObj.teamOneName, { exact: false });
     getAllByText(mockDataObj.teamTwoName, { exact: false });
 
