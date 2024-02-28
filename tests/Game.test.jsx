@@ -4,6 +4,79 @@ import { BrowserRouter } from "react-router-dom";
 import { describe, it, expect, beforeAll } from "vitest";
 import Game from "../src/pages/Game";
 
+const mockTrivia = [
+  {
+    id: "1",
+    category: "science",
+    question: "question 1",
+    correctAnswer: "option 2",
+    choices: ["option 1", "option 2", "option 3", "option 4"],
+  },
+  {
+    id: "2",
+    category: "science",
+    question: "question 2",
+    correctAnswer: "option 2",
+    choices: ["option 1", "option 2", "option 3", "option 4"],
+  },
+  {
+    id: "3",
+    category: "science",
+    question: "question 3",
+    correctAnswer: "option 2",
+    choices: ["option 1", "option 2", "option 3", "option 4"],
+  },
+  {
+    id: "4",
+    category: "science",
+    question: "question 4",
+    correctAnswer: "option 2",
+    choices: ["option 1", "option 2", "option 3", "option 4"],
+  },
+  {
+    id: "5",
+    category: "science",
+    question: "question 5",
+    correctAnswer: "option 2",
+    choices: ["option 1", "option 2", "option 3", "option 4"],
+  },
+  {
+    id: "6",
+    category: "science",
+    question: "question 6",
+    correctAnswer: "option 2",
+    choices: ["option 1", "option 2", "option 3", "option 4"],
+  },
+  {
+    id: "7",
+    category: "science",
+    question: "question 7",
+    correctAnswer: "option 2",
+    choices: ["option 1", "option 2", "option 3", "option 4"],
+  },
+  {
+    id: "8",
+    category: "science",
+    question: "question 8",
+    correctAnswer: "option 2",
+    choices: ["option 1", "option 2", "option 3", "option 4"],
+  },
+  {
+    id: "9",
+    category: "science",
+    question: "question 9",
+    correctAnswer: "option 2",
+    choices: ["option 1", "option 2", "option 3", "option 4"],
+  },
+  {
+    id: "10",
+    category: "science",
+    question: "question 10",
+    correctAnswer: "option 2",
+    choices: ["option 1", "option 2", "option 3", "option 4"],
+  },
+];
+
 const mockData = JSON.stringify({
   turn: 1,
   questionCompleted: false,
@@ -11,66 +84,7 @@ const mockData = JSON.stringify({
   currentTriviaIdx: 1,
   teamOneName: "myteamname",
   teamTwoName: "t2name",
-  trivia: [
-    {
-      id: "622a1c377cc59eab6f9504ff",
-      category: "science",
-      question: "What is Ludology the study of?",
-      correctAnswer: "games and play",
-      choices: [
-        "the scientific study of baths, bathing and of their application to disease",
-        "blood serum",
-        "word origins",
-        "games and play",
-      ],
-    },
-    {
-      id: "622a1c3a7cc59eab6f950fd8",
-      category: "science",
-      question: "Which vital organ does the adjective renal refer to?",
-      correctAnswer: "Kidney",
-      choices: ["Lung", "Kidney", "Heart", "Liver"],
-    },
-    {
-      id: "622a1c367cc59eab6f9503ef",
-      category: "science",
-      question:
-        "What did Francis Crick and James Watson build a molecular model of in 1953?",
-      correctAnswer: "DNA",
-      choices: ["The Brain", "Dark Matter", "Beta Radiation", "DNA"],
-    },
-    {
-      id: "650570497a97013de78b5574",
-      category: "science",
-      question: "Which of these can cause a thunderstorm?",
-      correctAnswer: "Warm air moving up fast",
-      choices: [
-        "Warm air moving up fast",
-        "Clouds at high altitudes",
-        "Ozone touching cloud",
-        "Earthquakes",
-      ],
-    },
-    {
-      id: "622a1c377cc59eab6f950562",
-      category: "science",
-      question: "What is Dermatology the study of?",
-      correctAnswer: "The skin",
-      choices: ["Birds", "Parasites", "The Ancient Egyptians", "The skin"],
-    },
-    {
-      id: "622a1c377cc59eab6f9505ac",
-      category: "science",
-      question: "What is Andrology the study of?",
-      correctAnswer: "Male health and disease",
-      choices: [
-        "Male health and disease",
-        "Animal behaviour",
-        "The causation of disease",
-        "The structure of cells",
-      ],
-    },
-  ],
+  trivia: mockTrivia,
   currRoundNumber: 1,
   categories: ["science"],
   roundInProgress: true,
@@ -80,11 +94,7 @@ const mockData = JSON.stringify({
   },
 });
 
-describe("Game", () => {
-  it("renders the Game component", () => {
-    render(<Game />, { wrapper: BrowserRouter });
-  });
-});
+function isCategorySelectScreen(view) {}
 
 describe("Load saveData", () => {
   beforeAll(() => {
