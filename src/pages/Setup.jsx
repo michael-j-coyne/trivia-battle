@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./setup.css";
 
-const screens = ["pickTeamOneName", "pickTeamTwoName", "pickNumRounds"];
+const screens = ["pickTeamOneName", "pickTeamTwoName"];
 const nameLengthLimit = 12;
 
 function NameSelector({ name, setName, title }) {
@@ -127,57 +127,6 @@ export default function Setup() {
                   </div>
                 </>
               );
-            // case "pickNumRounds":
-            //   return (
-            //     <>
-            //       <h1>
-            //         Pick the number of rounds & the number of questions per round!
-            //       </h1>
-            //       <div className="setup__select-container">
-            //         <label htmlFor="num-rounds-select">Number of rounds</label>
-            //         <select
-            //           value={numRounds}
-            //           onChange={(e) => setNumRounds(e.target.value)}
-            //           id="num-rounds-select"
-            //         >
-            //           <option value="1">1</option>
-            //           <option value="2">2</option>
-            //           <option value="3">3</option>
-            //           <option value="4">4</option>
-            //         </select>
-            //       </div>
-            //       <div className="setup__select-container">
-            //         <label htmlFor="num-questions-select">
-            //           <em>Total</em> number of questions per round
-            //         </label>
-            //         <select
-            //           value={numQuestionsPerRound}
-            //           onChange={(e) => setNumQuestionsPerRound(e.target.value)}
-            //           id="num-questions-select"
-            //         >
-            //           {Array.from({ length: 10 }).map((val, idx) => (
-            //             <option key={idx} value={idx * 2 + 2}>
-            //               {idx * 2 + 2}
-            //             </option>
-            //           ))}
-            //         </select>
-            //       </div>
-            //       <div className="setup__next-back-container">
-            //         <BackButton handleClick={goBack} />
-            //         <Link
-            //           to={`/game?teamone=${encodeURIComponent(
-            //             teamOneName
-            //           )}&teamtwo=${encodeURIComponent(
-            //             teamTwoName
-            //           )}&rounds=${numRounds}&questions=${numQuestionsPerRound}`}
-            //         >
-            //           <button className="button button_submit setup__name-selector__button">
-            //             Start
-            //           </button>
-            //         </Link>
-            //       </div>
-            //     </>
-            //   );
           }
         })()}
       </div>
