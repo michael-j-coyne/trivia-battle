@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./setup.css";
 
@@ -46,8 +46,6 @@ function BackButton({ handleClick }) {
 export default function Setup() {
   const [teamOneName, setTeamOneName] = useState("");
   const [teamTwoName, setTeamTwoName] = useState("");
-  const [numRounds, setNumRounds] = useState(2);
-  const [numQuestionsPerRound, setNumQuestionsPerRound] = useState(8);
   const [currIdx, setCurrIdx] = useState(0);
   const navigate = useNavigate();
 

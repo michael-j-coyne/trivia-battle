@@ -16,8 +16,6 @@ const categoryOptions = [
 export default function CategorySelector({
   initialCategories,
   handleSubmit,
-  teamName,
-  currRoundNumber,
   buttonText,
 }) {
   const [selectedCategoryIDs, setSelectedCategoryIDs] =
