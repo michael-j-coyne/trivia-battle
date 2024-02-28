@@ -1,8 +1,12 @@
-import { render } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { render, screen } from "@testing-library/react";
+import { BrowserRouter, MemoryRouter, Route, Routes } from "react-router-dom";
 
 import { describe, it, expect, beforeAll } from "vitest";
 import Game from "../src/pages/Game";
+import Setup from "../src/pages/Setup";
+
+const teamOneName = "myteamname";
+const teamTwoName = "t2name";
 
 const mockTrivia = [
   {
@@ -77,13 +81,13 @@ const mockTrivia = [
   },
 ];
 
-const mockData = JSON.stringify({
+const mockDataInGame = JSON.stringify({
   turn: 1,
   questionCompleted: false,
   currQuestionNumber: 2,
   currentTriviaIdx: 1,
-  teamOneName: "myteamname",
-  teamTwoName: "t2name",
+  teamOneName: teamOneName,
+  teamTwoName: teamTwoName,
   trivia: mockTrivia,
   currRoundNumber: 1,
   categories: ["science"],
@@ -94,34 +98,83 @@ const mockData = JSON.stringify({
   },
 });
 
-function isCategorySelectScreen(view) {}
+function isCategorySelectScreen() {
+  screen.getByText(/select categories!/i);
+  screen.getByRole("button", { name: /music/i });
+  screen.getByRole("button", { name: /history/i });
+  screen.getByRole("button", { name: /general knowledge/i });
+  screen.getByRole("button", { name: /geography/i });
+  screen.getByRole("button", { name: /start game/i });
 
-describe("Load saveData", () => {
+  return true;
+}
+
+function isSetupScreen() {
+  screen.getByText(/pick a name/i);
+  screen.getByRole("button", { name: /next/i });
+
+  return true;
+}
+
+function isGameScreen() {
+  screen.getAllByText(teamOneName, { exact: false });
+  screen.getAllByText(teamTwoName, { exact: false });
+
+  screen.getByRole("button", { name: /option 1/i });
+  screen.getByRole("button", { name: /option 2/i });
+  screen.getByRole("button", { name: /option 3/i });
+  screen.getByRole("button", { name: /option 4/i });
+
+  return true;
+}
+
+describe("Load /game route without query params and without query string", () => {
+  it("Should redirect to /setup", () => {
+    render(
+      <MemoryRouter initialEntries={["/game"]}>
+        <Routes>
+          <Route path="/setup" element={<Setup />} />
+          <Route path="/game" element={<Game />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(isSetupScreen()).toEqual(true);
+  });
+});
+
+describe("Load /game route without query params but with query string params", () => {
+  it("Should redirect to /setup", () => {
+    render(
+      <MemoryRouter
+        initialEntries={[
+          {
+            pathname: "/game",
+            search: `?teamone=${teamOneName}&teamtwo=${teamTwoName}`,
+          },
+        ]}
+      >
+        <Routes>
+          <Route path="/setup" element={<Setup />} />
+          <Route path="/game" element={<Game />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(isCategorySelectScreen()).toEqual(true);
+  });
+});
+
+describe("Load <Game /> without query string params but with saveData", () => {
   beforeAll(() => {
-    localStorage.setItem("saveData", mockData);
+    localStorage.setItem("saveData", mockDataInGame);
     return () => {
       localStorage.clear();
     };
   });
 
-  const mockDataObj = JSON.parse(mockData);
-
   it("Initializes the Game component using the saveData in localstorage", () => {
-    const { getAllByText, queryByText } = render(<Game />, {
-      wrapper: BrowserRouter,
-    });
-
-    // I need "isGameScreen()" and "isCategorySelectScreen()" and "isWinScreen()"
-    // functions
-
-    // they will take the return value of render() as an argument
-    // function isGameScreen(queries) { }
-
-    // The "game" screen should contain BOTH of the team names
-    getAllByText(mockDataObj.teamOneName, { exact: false });
-    getAllByText(mockDataObj.teamTwoName, { exact: false });
-
-    // We should not be in the start screen
-    expect(queryByText("start game", { exact: false })).not.toBeInTheDocument();
+    render(<Game />, { wrapper: BrowserRouter });
+    expect(isGameScreen()).toEqual(true);
   });
 });
