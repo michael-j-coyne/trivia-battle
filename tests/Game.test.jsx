@@ -112,6 +112,6 @@ describe("Load saveData", () => {
     getAllByText(mockDataObj.teamTwoName, { exact: false });
 
     // We should not be in the start screen
-    expect(queryByText("start game", { exact: false })).toBeNull();
+    expect(queryByText("start game", { exact: false })).not.toBeInTheDocument();
   });
 });
