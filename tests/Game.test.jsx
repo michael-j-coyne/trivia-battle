@@ -128,7 +128,7 @@ function isGameScreen() {
   return true;
 }
 
-describe("Load /game route without query params and without query string", () => {
+describe("Load /game route without query params or saveData", () => {
   it("Should redirect to /setup", () => {
     render(
       <MemoryRouter initialEntries={["/game"]}>
@@ -143,7 +143,7 @@ describe("Load /game route without query params and without query string", () =>
   });
 });
 
-describe("Load /game route without query params but with query string params", () => {
+describe("Load /game route with query params", () => {
   it("Should redirect to /setup", () => {
     render(
       <MemoryRouter
@@ -165,7 +165,7 @@ describe("Load /game route without query params but with query string params", (
   });
 });
 
-describe("Load <Game /> without query string params but with saveData", () => {
+describe("Load <Game /> without query string params BUT with saveData", () => {
   beforeAll(() => {
     localStorage.setItem("saveData", mockDataInGame);
     return () => {
