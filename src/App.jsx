@@ -1,4 +1,5 @@
 import "./App.css";
+import fetchTrivia from "./fetchTrivia";
 import Home from "./pages/Home";
 import Game from "./pages/Game";
 import Setup from "./pages/Setup";
@@ -11,7 +12,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/game" element={<Game />} />
+        <Route path="/game" element={<Game fetchTrivia={fetchTrivia} />} />
         <Route path="/Setup" element={<Setup />} />
         <Route path="/continue" element={<Continue />} />
         <Route path="/win" element={<Win />} />

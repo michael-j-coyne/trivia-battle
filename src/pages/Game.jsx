@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Trivia from "../components/Trivia";
 import { TEAM_ONE, TEAM_TWO } from "../consts";
 import CategorySelector from "../components/CategorySelector";
-import fetchTrivia from "../fetchTrivia";
 import "./game.css";
 import "../components/round.css";
 
@@ -62,7 +61,7 @@ function useNestedLocalStorage({
   return [val, setVal];
 }
 
-export default function Game() {
+export default function Game({ fetchTrivia }) {
   const [turn, setTurn] = useState(TEAM_ONE);
 
   // TODO: move state into TriviaItem
