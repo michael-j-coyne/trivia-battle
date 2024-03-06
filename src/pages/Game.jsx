@@ -11,6 +11,57 @@ const numQuestionsToFetch = 50;
 const totalRounds = 1;
 const questionsPerRound = 10;
 
+function useLocalStorage(key, defaultValue) {
+  const [val, setVal] = useState(localStorage.getItem(key) || defaultValue);
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(val));
+  }, [val]);
+
+  return [val, setVal];
+}
+
+// replacer is optional
+function useLocalStorageRef(key, { defaultValue, replacer }) {
+  const ref = useRef(JSON.parse(localStorage.getItem(key)) || defaultValue);
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(ref.current, replacer));
+  }, [ref.current]);
+
+  return ref;
+}
+
+// Perhaps I could write a function that allows for arbitrary amounts of nesting...
+function useNestedLocalStorage({
+  localStorageKey,
+  objectKey,
+  defaultValue,
+  replacer,
+}) {
+  const [val, setVal] = useState(
+    JSON.parse(localStorage.getItem(localStorageKey))?.[objectKey] ||
+      defaultValue
+  );
+
+  useEffect(() => {
+    const prev = JSON.parse(localStorage.getItem(localStorageKey));
+
+    localStorage.setItem(
+      localStorageKey,
+      JSON.stringify(
+        {
+          ...prev,
+          [objectKey]: val,
+        },
+        replacer
+      )
+    );
+  }, [val]);
+
+  return [val, setVal];
+}
+
 export default function Game() {
   const [turn, setTurn] = useState(TEAM_ONE);
 
