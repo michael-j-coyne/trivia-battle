@@ -20,12 +20,6 @@ export default function Trivia({
   const [stolenAns, setStolenAns] = useState();
 
   useEffect(() => {
-    setSelectedAns();
-    setStolenAns();
-    setIsStealMode(false);
-  }, [question]);
-
-  useEffect(() => {
     seen.current.add(id);
   }, [id]);
 

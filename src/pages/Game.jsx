@@ -280,6 +280,7 @@ export default function Game() {
             choices={trivia[currentTriviaIdx].choices}
             correctAnswer={trivia[currentTriviaIdx].correctAnswer}
             id={trivia[currentTriviaIdx].id}
+            key={trivia[currentTriviaIdx].id}
             seen={seen}
             team={turn}
             teamNames={{ [TEAM_ONE]: teamOneName, [TEAM_TWO]: teamTwoName }}
