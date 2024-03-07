@@ -15,6 +15,7 @@ function NameSelector({ name, setName, title }) {
           e.target.value.length <= nameLengthLimit && setName(e.target.value)
         }
         type="text"
+        aria-label="Team name"
         value={name}
       ></input>
     </>
