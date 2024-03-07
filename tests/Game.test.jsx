@@ -219,7 +219,7 @@ describe("Load /game route with query params", () => {
   });
 });
 
-describe("Load <Game /> without query string params BUT with saveData", () => {
+describe("Load <Game /> with saveData in localstorage", () => {
   beforeAll(() => {
     localStorage.setItem("saveData", mockDataInGame);
     return () => {
