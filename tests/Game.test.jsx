@@ -178,6 +178,11 @@ function expectQuestionNumberToBe(questionNum) {
   screen.getByText(`Q ${questionNum} / 10`);
 }
 
+function expectTurnToBe(teamName) {
+  const question = screen.getByText(/question/i);
+  expect(question).toHaveTextContent(new RegExp(`${teamName}: question`, "i"));
+}
+
 function questionCompleted() {
   return screen.queryByText(/next question/i) !== null;
 }
@@ -233,34 +238,45 @@ describe("Load <Game /> with saveData in localstorage", () => {
   });
 });
 
+// we should go to continue screen if we land on /setup or /game with savedata in localstorage
+
+// lets test saving... I want to simulate "closing the window"
+const renderGame = (initialPath) =>
+  render(
+    <MemoryRouter
+      initialEntries={[
+        {
+          pathname: initialPath,
+        },
+      ]}
+    >
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/setup" element={<Setup />} />
+        <Route
+          path="/game"
+          // FYI: the fetchMockTrivia function does not take category selection into account.
+          element={<Game fetchTrivia={fetchMockTrivia} />}
+        />
+        <Route path="/win" element={<Win />} />
+      </Routes>
+    </MemoryRouter>
+  );
+
 describe("Play through the game", () => {
   it("plays through the entire game. Starts at the home page, goes through and picks team names, then starts the game. Tests out steal mode, ensures points are incremented, ensures win screen is displayed at the end.", async () => {
     const user = userEvent.setup();
 
-    render(
-      <MemoryRouter
-        initialEntries={[
-          {
-            pathname: "/",
-          },
-        ]}
-      >
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/setup" element={<Setup />} />
-          <Route
-            path="/game"
-            // FYI: the fetchMockTrivia function does not take category selection into account.
-            element={<Game fetchTrivia={fetchMockTrivia} />}
-          />
-          <Route path="/win" element={<Win />} />
-        </Routes>
-      </MemoryRouter>
-    );
+    let { unmount } = renderGame("/");
 
     // utility funcs
-    const goNextQuestion = async () =>
+    const goNextQuestion = async () => {
+      // debug code
+      // console.log("called go next question");
       await user.click(screen.getByRole("button", { name: /next question/i }));
+      // debug code
+      // console.log("done awaiting  ");
+    };
     const pickOption = async (optionName) =>
       await user.click(screen.getByRole("button", { name: optionName }));
 
@@ -296,6 +312,7 @@ describe("Play through the game", () => {
 
     expectGameScreen();
     expectQuestionNumberToBe(1);
+    expectTurnToBe(teamOneName);
     expect(localStorage.getItem("saveData")).not.toBeNull();
 
     await pickOption(/option 2/i);
@@ -335,10 +352,49 @@ describe("Play through the game", () => {
     await goNextQuestion();
 
     await pickOption(/option 2/i);
+    // debug statements
+    // console.log("ADSFASD FASDF ASDFDSF ");
+    // screen.debug();
     await goNextQuestion();
+    // console.log("yo i am here dawg");
+
+    // after remounting, we should come back to the game with score and question number intact
+    expect(questionCompleted()).toBeFalsy();
+    expectScoreToBe(3, 2);
+    expectQuestionNumberToBe(7);
+    expectTurnToBe(teamOneName);
+
+    expect(JSON.parse(localStorage.getItem("saveData")).categories).toEqual([
+      "history",
+    ]);
+
+    unmount();
+    unmount = renderGame("/game").unmount;
+
+    expectScoreToBe(3, 2);
+    expectQuestionNumberToBe(7);
+    expect(questionCompleted()).toBeFalsy();
+    expectTurnToBe(teamOneName);
+
+    expect(JSON.parse(localStorage.getItem("saveData")).categories).toEqual([
+      "history",
+    ]);
 
     await pickOption(/option 2/i);
+
+    // try unmounting while question is completed to ensure that piece of state is being saved
+    expect(questionCompleted()).toBeTruthy();
+    unmount();
+    unmount = renderGame("/game").unmount;
+    expect(questionCompleted()).toBeTruthy();
+
     await goNextQuestion();
+
+    // try unmounting on player 2's turn
+    expectTurnToBe(teamTwoName);
+    unmount();
+    unmount = renderGame("/game").unmount;
+    expectTurnToBe(teamTwoName);
 
     await pickOption(/option 2/i);
     await goNextQuestion();
