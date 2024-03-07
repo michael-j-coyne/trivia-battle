@@ -319,6 +319,7 @@ describe("Play through the game", () => {
     await pickOption(/option 4/i);
     expect(questionCompleted()).toBeFalsy();
 
+    // picked the wrong answer during steal, no points should be awarded
     await pickOption(/option 3/i);
     expect(questionCompleted()).toBeTruthy();
     expectScoreToBe(2, 0);
