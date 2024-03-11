@@ -1,4 +1,4 @@
-import "./category-selector.css";
+import "./game-start-screen.css";
 import { useState } from "react";
 
 const categoryOptions = [
@@ -13,7 +13,7 @@ const categoryOptions = [
   { id: "food_and_drink", optionText: "Food & drink" },
   { id: "general_knowledge", optionText: "General knowledge" },
 ];
-export default function CategorySelector({
+export default function GameStartScreen({
   initialCategories,
   handleSubmit,
   buttonText,
@@ -37,8 +37,8 @@ export default function CategorySelector({
       key={idx}
       onClick={() => handleClick(id)}
       className={
-        "category-selector__button" +
-        (isSelected(id) ? " category-selector__button_selected" : "")
+        "game-start-screen__button" +
+        (isSelected(id) ? " game-start-screen__button_selected" : "")
       }
     >
       {optionText}
@@ -46,14 +46,14 @@ export default function CategorySelector({
   ));
 
   return (
-    <div className="category-selector">
-      <h1 className="category-selector__title">Select categories!</h1>
-      <div className="category-selector__options-container">
+    <div className="game-start-screen">
+      <h1 className="game-start-screen__title">Select categories!</h1>
+      <div className="game-start-screen__options-container">
         {categoryOptionElems}
       </div>
       <button
         onClick={() => handleSubmit(selectedCategoryIDs)}
-        className="button button_submit category-selector__submit"
+        className="button button_submit game-start-screen__submit"
       >
         {buttonText}
       </button>

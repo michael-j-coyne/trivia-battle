@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Trivia from "../components/Trivia";
 import { TEAM_ONE, TEAM_TWO } from "../consts";
-import CategorySelector from "../components/CategorySelector";
+import GameStartScreen from "../components/GameStartScreen";
 import "./game.css";
 import "../components/round.css";
 
@@ -249,7 +249,7 @@ export default function Game({ fetchTrivia }) {
           )}
         </div>
       ) : (
-        <CategorySelector
+        <GameStartScreen
           initialCategories={categories}
           handleSubmit={handleCategorySubmit}
           teamName={currRoundNumber % 2 == 0 ? teamTwoName : teamOneName}
