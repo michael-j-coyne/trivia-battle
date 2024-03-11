@@ -10,27 +10,6 @@ const numQuestionsToFetch = 50;
 const totalRounds = 1;
 const questionsPerRound = 10;
 
-function useLocalStorage(key, defaultValue) {
-  const [val, setVal] = useState(localStorage.getItem(key) || defaultValue);
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(val));
-  }, [val]);
-
-  return [val, setVal];
-}
-
-// replacer is optional
-function useLocalStorageRef(key, { defaultValue, replacer }) {
-  const ref = useRef(JSON.parse(localStorage.getItem(key)) || defaultValue);
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(ref.current, replacer));
-  }, [ref.current]);
-
-  return ref;
-}
-
 export default function Game({ fetchTrivia }) {
   const [turn, setTurn] = useState(TEAM_ONE);
 
