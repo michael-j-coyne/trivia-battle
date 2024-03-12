@@ -1,5 +1,7 @@
 #root {
   --default-page-padding: 2rem;
+  --full-height: calc(85vh - 2 * var(--default-page-padding));
+  --full-height: calc(100dvh - 2 * var(--default-page-padding));
 
   max-width: 1280px;
   margin: 0 auto;

@@ -1,5 +1,5 @@
 .win {
-  height: calc(85vh - 2 * var(--default-page-padding));
+  height: var(--full-height);
   display: flex;
   flex-direction: column;
   justify-content: center;

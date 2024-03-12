@@ -4,7 +4,7 @@
 
   justify-content: center;
 
-  height: calc(85vh - 2 * var(--default-page-padding));
+  height: var(--full-height);
 }
 
 .home__title {

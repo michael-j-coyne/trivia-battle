@@ -1,6 +1,6 @@
 .continue {
   display: flex;
-  height: calc(85vh - 2 * var(--default-page-padding));
+  height: var(--full-height);
   flex-direction: column;
   align-items: center;
   justify-content: center;
