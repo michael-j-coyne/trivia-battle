@@ -1,6 +1,7 @@
 .game {
   height: var(--full-height);
   width: calc(100vw - 2 * var(--default-page-padding));
+  max-width: 480px;
 }
 
 .game__next-button {
